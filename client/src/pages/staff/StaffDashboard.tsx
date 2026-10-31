@@ -8,10 +8,15 @@ import {
   ShieldCheck,
   TrendingUp,
 } from "lucide-react";
+import { QuotationsTab } from "./QuotationsTab";
+import { SubscriptionsTab } from "./SubscriptionsTab";
+import { InvoicesTab } from "./InvoicesTab";
+import { PaymentsTab } from "./PaymentsTab";
+import { CustomersTab } from "./CustomersTab";
 
 export const StaffDashboard: React.FC = () => {
   const { user, logout } = useAuth();
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState("quotations");
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
@@ -83,37 +88,54 @@ export const StaffDashboard: React.FC = () => {
 
         {/* Workspace Body */}
         <main className="flex-1 p-6 md:p-8 space-y-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-2xl font-bold text-white tracking-tight">Staff Operations Center</h2>
-              <p className="text-xs text-slate-400 mt-1">
-                Manage day-to-day customer quotations, activate subscriptions, issue invoices, and record incoming payments.
-              </p>
-            </div>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Staff Active Session
-            </span>
-          </div>
+          {activeTab === "customers" && <CustomersTab />}
+          {activeTab === "quotations" && <QuotationsTab />}
+          {activeTab === "subscriptions" && <SubscriptionsTab />}
+          {activeTab === "invoices" && <InvoicesTab />}
+          {activeTab === "payments" && <PaymentsTab />}
 
-          {/* User Session Profile Card */}
-          <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6 space-y-4">
-            <h3 className="text-base font-semibold text-white">Staff Member Credentials</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
-              <div className="p-3 rounded-lg border border-slate-800/80 bg-slate-950/60">
-                <div className="text-slate-500 mb-1">User ID:</div>
-                <div className="text-slate-200 truncate">{user?.id}</div>
+          {activeTab === "overview" && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-2xl font-bold text-white tracking-tight">Staff Operations Center</h2>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Manage day-to-day customer quotations, activate subscriptions, issue invoices, and record incoming payments.
+                  </p>
+                </div>
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  Staff Active Session
+                </span>
               </div>
-              <div className="p-3 rounded-lg border border-slate-800/80 bg-slate-950/60">
-                <div className="text-slate-500 mb-1">Email:</div>
-                <div className="text-slate-200">{user?.email}</div>
-              </div>
-              <div className="p-3 rounded-lg border border-slate-800/80 bg-slate-950/60">
-                <div className="text-slate-500 mb-1">Assigned Role:</div>
-                <div className="text-blue-400 font-bold">{user?.role}</div>
+
+              {/* User Session Profile Card */}
+              <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6 space-y-4">
+                <h3 className="text-base font-semibold text-white">Staff Member Credentials</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+                  <div className="p-3 rounded-lg border border-slate-800/80 bg-slate-950/60">
+                    <div className="text-slate-500 mb-1">User ID:</div>
+                    <div className="text-slate-200 truncate">{user?.id}</div>
+                  </div>
+                  <div className="p-3 rounded-lg border border-slate-800/80 bg-slate-950/60">
+                    <div className="text-slate-500 mb-1">Email:</div>
+                    <div className="text-slate-200">{user?.email}</div>
+                  </div>
+                  <div className="p-3 rounded-lg border border-slate-800/80 bg-slate-950/60">
+                    <div className="text-slate-500 mb-1">Assigned Role:</div>
+                    <div className="text-blue-400 font-bold">{user?.role}</div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          )}
+
+          {activeTab !== "quotations" && activeTab !== "subscriptions" && activeTab !== "overview" && (
+            <div className="p-12 text-center border border-slate-800 rounded-xl bg-slate-900/30">
+              <h3 className="text-sm font-semibold text-slate-300 capitalize">{activeTab} Management</h3>
+              <p className="text-xs text-slate-500 mt-1">Select Quotations from the left navigation to work with proposals and contract conversions.</p>
+            </div>
+          )}
         </main>
       </div>
     </div>

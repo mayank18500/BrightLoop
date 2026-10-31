@@ -14,7 +14,13 @@
     "prisma:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
     "test:auth": "tsx src/tests/testAuth.ts",
-    "test:catalog": "tsx src/tests/testCatalog.ts"
+    "test:catalog": "tsx src/tests/testCatalog.ts",
+    "test:quotations": "tsx src/tests/testQuotations.ts",
+    "test:subscriptions": "tsx src/tests/testSubscriptions.ts",
+    "test:invoices": "tsx src/tests/testInvoices.ts",
+    "test:payments": "tsx src/tests/testPayments.ts",
+    "test:reports": "tsx src/tests/testReports.ts",
+    "test:all": "npm run test:auth && npm run test:catalog && npm run test:quotations && npm run test:subscriptions && npm run test:invoices && npm run test:payments && npm run test:reports"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

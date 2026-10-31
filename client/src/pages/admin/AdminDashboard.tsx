@@ -4,6 +4,13 @@ import { ProductsTab } from "./ProductsTab";
 import { PlansTab } from "./PlansTab";
 import { TaxesTab } from "./TaxesTab";
 import { DiscountsTab } from "./DiscountsTab";
+import { OverviewTab } from "./OverviewTab";
+import { StaffManagementTab } from "./StaffManagementTab";
+import { CustomersTab } from "../staff/CustomersTab";
+import { QuotationsTab } from "../staff/QuotationsTab";
+import { SubscriptionsTab } from "../staff/SubscriptionsTab";
+import { InvoicesTab } from "../staff/InvoicesTab";
+import { PaymentsTab } from "../staff/PaymentsTab";
 import {
   ShieldAlert,
   LogOut,
@@ -99,80 +106,23 @@ export const AdminDashboard: React.FC = () => {
 
         {/* Workspace Body */}
         <main className="flex-1 p-6 md:p-8 space-y-6">
+          {activeTab === "overview" && <OverviewTab />}
+          {activeTab === "staff" && <StaffManagementTab />}
+          {activeTab === "customers" && <CustomersTab />}
           {activeTab === "products" && <ProductsTab />}
           {activeTab === "plans" && <PlansTab />}
           {activeTab === "taxes" && <TaxesTab />}
           {activeTab === "discounts" && <DiscountsTab />}
+          {activeTab === "quotations" && <QuotationsTab />}
+          {activeTab === "subscriptions" && <SubscriptionsTab />}
+          {activeTab === "invoices" && <InvoicesTab />}
+          {activeTab === "payments" && <PaymentsTab />}
 
-          {activeTab === "overview" && (
-            <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-2xl font-bold text-white tracking-tight">
-                    Administrator Overview
-                  </h2>
-                  <p className="text-xs text-slate-400 mt-1">
-                    Full authority access for products, subscription plans, staff accounts, and financial controls.
-                  </p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                    Authenticated Session Active
-                  </span>
-                </div>
-              </div>
-
-              {/* Quick Stats Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="p-5 rounded-xl border border-slate-800 bg-slate-900/60 space-y-2">
-                  <div className="text-xs font-medium text-slate-400">Total Active Subscriptions</div>
-                  <div className="text-2xl font-bold text-white">0</div>
-                  <div className="text-[11px] text-slate-500">Live recurring contracts</div>
-                </div>
-                <div className="p-5 rounded-xl border border-slate-800 bg-slate-900/60 space-y-2">
-                  <div className="text-xs font-medium text-slate-400">Total Revenue Received</div>
-                  <div className="text-2xl font-bold text-emerald-400">₹0.00</div>
-                  <div className="text-[11px] text-slate-500">Settled payments</div>
-                </div>
-                <div className="p-5 rounded-xl border border-slate-800 bg-slate-900/60 space-y-2">
-                  <div className="text-xs font-medium text-slate-400">Outstanding Invoices</div>
-                  <div className="text-2xl font-bold text-amber-400">₹0.00</div>
-                  <div className="text-[11px] text-slate-500">Pending customer balance</div>
-                </div>
-                <div className="p-5 rounded-xl border border-slate-800 bg-slate-900/60 space-y-2">
-                  <div className="text-xs font-medium text-slate-400">System Role</div>
-                  <div className="text-2xl font-bold text-blue-400">ADMIN</div>
-                  <div className="text-[11px] text-slate-500">Unlimited permission level</div>
-                </div>
-              </div>
-
-              {/* User Session Profile Card */}
-              <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6 space-y-4">
-                <h3 className="text-base font-semibold text-white">Current Session Identity</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
-                  <div className="p-3 rounded-lg border border-slate-800/80 bg-slate-950/60">
-                    <div className="text-slate-500 mb-1">User ID:</div>
-                    <div className="text-slate-200 truncate">{user?.id}</div>
-                  </div>
-                  <div className="p-3 rounded-lg border border-slate-800/80 bg-slate-950/60">
-                    <div className="text-slate-500 mb-1">Email:</div>
-                    <div className="text-slate-200">{user?.email}</div>
-                  </div>
-                  <div className="p-3 rounded-lg border border-slate-800/80 bg-slate-950/60">
-                    <div className="text-slate-500 mb-1">Assigned Role:</div>
-                    <div className="text-blue-400 font-bold">{user?.role}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Placeholder for remaining tabs */}
-          {["staff", "customers", "quotations", "subscriptions", "invoices", "payments", "settings"].includes(activeTab) && (
+          {/* Placeholder for settings */}
+          {activeTab === "settings" && (
             <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-12 text-center text-slate-400">
-              <div className="text-base font-semibold text-slate-300 capitalize">{activeTab} Management</div>
-              <p className="text-xs text-slate-500 mt-1">This module is scheduled for the upcoming phase.</p>
+              <div className="text-base font-semibold text-slate-300 capitalize">System Settings</div>
+              <p className="text-xs text-slate-500 mt-1">Platform environment and global notification configurations.</p>
             </div>
           )}
         </main>

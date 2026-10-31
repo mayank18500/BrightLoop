@@ -3,7 +3,9 @@ import { Role } from "@prisma/client";
 import { prisma } from "../lib/prisma";
 import { AUTH_COOKIE_NAME, verifyToken } from "../utils/token";
 import { AppError } from "./errorHandler";
-import { AuthenticatedRequest } from "../modules/auth/auth.types";
+import { AuthenticatedRequest, AuthenticatedUser } from "../modules/auth/auth.types";
+
+export type { AuthenticatedUser };
 
 export const authenticateUser = async (
   req: AuthenticatedRequest,

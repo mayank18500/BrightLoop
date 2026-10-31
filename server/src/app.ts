@@ -10,6 +10,12 @@ import productsRoutes from "./modules/products/products.routes";
 import plansRoutes from "./modules/plans/plans.routes";
 import taxesRoutes from "./modules/taxes/taxes.routes";
 import discountsRoutes from "./modules/discounts/discounts.routes";
+import quotationsRoutes from "./modules/quotations/quotations.routes";
+import customersRoutes from "./modules/customers/customers.routes";
+import subscriptionsRoutes from "./modules/subscriptions/subscriptions.routes";
+import invoicesRoutes from "./modules/invoices/invoices.routes";
+import paymentsRoutes from "./modules/payments/payments.routes";
+import reportsRoutes from "./modules/reports/reports.routes";
 
 const app: Application = express();
 
@@ -38,10 +44,16 @@ app.get("/api/v1/health", (_req: Request, res: Response) => {
 // API v1 Module Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", usersRoutes);
+app.use("/api/v1/customers", customersRoutes);
 app.use("/api/v1/products", productsRoutes);
 app.use("/api/v1/plans", plansRoutes);
 app.use("/api/v1/taxes", taxesRoutes);
 app.use("/api/v1/discounts", discountsRoutes);
+app.use("/api/v1/quotations", quotationsRoutes);
+app.use("/api/v1/subscriptions", subscriptionsRoutes);
+app.use("/api/v1/invoices", invoicesRoutes);
+app.use("/api/v1/payments", paymentsRoutes);
+app.use("/api/v1/reports", reportsRoutes);
 
 // 404 Handler
 app.use(notFoundHandler);
