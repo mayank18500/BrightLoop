@@ -23,9 +23,9 @@ export interface CustomerDetail extends CustomerInfo {
     subscriptions: number;
     invoices: number;
   };
-  quotations?: any[];
-  subscriptions?: any[];
-  invoices?: any[];
+  quotations?: Record<string, unknown>[];
+  subscriptions?: Record<string, unknown>[];
+  invoices?: Record<string, unknown>[];
 }
 
 export const customerService = {

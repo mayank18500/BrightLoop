@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { authService } from "./auth.service";
-import { setAuthCookie, clearAuthCookie } from "../../utils/token";
+import { setAuthCookie, clearAuthCookie, AUTH_COOKIE_NAME } from "../../utils/token";
 import { AuthenticatedRequest } from "./auth.types";
 
 export class AuthController {
@@ -29,11 +29,36 @@ export class AuthController {
       res.status(200).json({
         success: true,
         data: {
+          token: result.token,
           user: result.user,
           customer: result.customer,
         },
       });
     } catch (error) {
+      next(error);
+    }
+  }
+
+  async refresh(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      let token = req.cookies?.[AUTH_COOKIE_NAME];
+      if (!token && req.headers.authorization?.startsWith("Bearer ")) {
+        token = req.headers.authorization.split(" ")[1];
+      }
+
+      const result = await authService.refreshToken(token);
+      setAuthCookie(res, result.token);
+
+      res.status(200).json({
+        success: true,
+        data: {
+          token: result.token,
+          user: result.user,
+          customer: result.customer,
+        },
+      });
+    } catch (error) {
+      clearAuthCookie(res);
       next(error);
     }
   }

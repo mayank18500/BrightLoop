@@ -72,11 +72,12 @@ export const CustomersTab: React.FC = () => {
       setTaxId("");
       setFeedback({ type: "success", text: `Client profile for ${companyName} created successfully.` });
       fetchCustomers();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Failed to create customer", err);
+      const errResponse = err as { response?: { data?: { error?: { message?: string }; message?: string } } };
       setFeedback({
         type: "error",
-        text: err.response?.data?.error?.message || "Failed to create customer account.",
+        text: errResponse.response?.data?.error?.message || errResponse.response?.data?.message || "Failed to create customer account.",
       });
     } finally {
       setSubmitting(false);

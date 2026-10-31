@@ -151,7 +151,7 @@ export const ReportsTab: React.FC = () => {
             ].map((period) => (
               <button
                 key={period.id}
-                onClick={() => setSelectedPeriod(period.id as any)}
+                onClick={() => setSelectedPeriod(period.id as "ALL" | "THIS_MONTH" | "THIS_QUARTER" | "THIS_YEAR")}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
                   selectedPeriod === period.id
                     ? "bg-[#2563EB] text-white shadow-sm"

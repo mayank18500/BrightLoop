@@ -2,7 +2,8 @@ import bcrypt from "bcrypt";
 import { Role } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
 import { AppError } from "../../middleware/errorHandler";
-import { signToken, signPasswordResetToken, verifyPasswordResetToken } from "../../utils/token";
+import { env } from "../../config/env";
+import { signToken, verifyToken, signPasswordResetToken, verifyPasswordResetToken } from "../../utils/token";
 import { RegisterInput, LoginInput, ResetPasswordInput } from "./auth.validation";
 
 export class AuthService {
@@ -133,6 +134,50 @@ export class AuthService {
   }
 
   /**
+   * Re-issue a fresh JWT session token for an active user.
+   */
+  async refreshToken(rawToken?: string) {
+    if (!rawToken) {
+      throw new AppError("No session token provided for refresh.", 401);
+    }
+
+    let decoded;
+    try {
+      decoded = verifyToken(rawToken);
+    } catch {
+      throw new AppError("Session token expired or invalid. Please log in again.", 401);
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { id: decoded.userId },
+      include: { customer: true },
+    });
+
+    if (!user || !user.isActive) {
+      throw new AppError("User account not found or has been deactivated.", 401);
+    }
+
+    const token = signToken({
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+      customerId: user.customer?.id ?? null,
+    });
+
+    return {
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        customerId: user.customer?.id ?? null,
+      },
+      customer: user.customer,
+      token,
+    };
+  }
+
+  /**
    * Retrieve current user profile and linked customer data.
    */
   async getCurrentUser(userId: string) {
@@ -175,7 +220,7 @@ export class AuthService {
 
     return {
       message: "If that email address is registered, a password reset link has been dispatched.",
-      resetToken: process.env.NODE_ENV !== "production" ? resetToken : undefined,
+      resetToken: env.NODE_ENV !== "production" ? resetToken : undefined,
     };
   }
 

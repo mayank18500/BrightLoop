@@ -19,6 +19,10 @@ router.post("/login", validateRequest(loginSchema), (req, res, next) =>
   authController.login(req, res, next)
 );
 
+router.post("/refresh", (req, res, next) =>
+  authController.refresh(req, res, next)
+);
+
 router.post("/logout", (req, res, next) =>
   authController.logout(req, res, next)
 );
