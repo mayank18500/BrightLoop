@@ -238,7 +238,7 @@ export const QuotationsTab: React.FC = () => {
   const draftCount = quotations.filter((q) => q.status === "DRAFT").length;
   const sentCount = quotations.filter((q) => q.status === "SENT").length;
   const confirmedCount = quotations.filter((q) => q.status === "CONFIRMED").length;
-  const convertedCount = quotations.filter((q) => q.subscriptions && q.subscriptions.length > 0).length;
+  const convertedCount = quotations.filter((q) => q.subscription || (q.subscriptions && q.subscriptions.length > 0)).length;
 
   const filteredQuotations = quotations.filter((q) => {
     const matchesSearch =
@@ -248,7 +248,7 @@ export const QuotationsTab: React.FC = () => {
 
     if (!matchesSearch) return false;
     if (statusFilter === "ALL") return true;
-    if (statusFilter === "CONVERTED") return q.subscriptions && q.subscriptions.length > 0;
+    if (statusFilter === "CONVERTED") return !!(q.subscription || (q.subscriptions && q.subscriptions.length > 0));
     return q.status === statusFilter;
   });
 
@@ -546,7 +546,7 @@ export const QuotationsTab: React.FC = () => {
 
                           {hasSub && (
                             <span className="text-[11px] text-purple-400 font-mono">
-                              {q.subscriptions![0].subscriptionNumber}
+                              {q.subscription?.subscriptionNumber || q.subscriptions?.[0]?.subscriptionNumber}
                             </span>
                           )}
 
@@ -881,7 +881,7 @@ export const QuotationsTab: React.FC = () => {
                     </h3>
                     {getStatusBadge(
                       selectedQuotation.status,
-                      !!(selectedQuotation.subscriptions && selectedQuotation.subscriptions.length > 0)
+                      !!(selectedQuotation.subscription || (selectedQuotation.subscriptions && selectedQuotation.subscriptions.length > 0))
                     )}
                   </div>
                   <p className="text-xs text-slate-400">
@@ -1028,16 +1028,16 @@ export const QuotationsTab: React.FC = () => {
               </div>
 
               {/* Subscriptions Linked */}
-              {selectedQuotation.subscriptions && selectedQuotation.subscriptions.length > 0 && (
+              {(selectedQuotation.subscription || (selectedQuotation.subscriptions && selectedQuotation.subscriptions.length > 0)) && (
                 <div className="p-3 rounded-xl border border-purple-500/30 bg-purple-500/10 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="h-5 w-5 text-purple-400" />
                     <div>
                       <div className="font-semibold text-purple-200">
-                        Active Subscription Contract: {selectedQuotation.subscriptions[0].subscriptionNumber}
+                        Active Subscription Contract: {selectedQuotation.subscription?.subscriptionNumber || selectedQuotation.subscriptions?.[0]?.subscriptionNumber}
                       </div>
                       <div className="text-[11px] text-purple-300">
-                        Status: {selectedQuotation.subscriptions[0].status}
+                        Status: {selectedQuotation.subscription?.status || selectedQuotation.subscriptions?.[0]?.status}
                       </div>
                     </div>
                   </div>
@@ -1078,6 +1078,7 @@ export const QuotationsTab: React.FC = () => {
                 )}
 
                 {selectedQuotation.status === "CONFIRMED" &&
+                  !selectedQuotation.subscription &&
                   (!selectedQuotation.subscriptions || selectedQuotation.subscriptions.length === 0) && (
                     <button
                       onClick={() => {
