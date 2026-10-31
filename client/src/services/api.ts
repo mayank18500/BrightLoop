@@ -7,9 +7,19 @@ declare module "axios" {
   }
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL.replace(/\/+$/, "")}/api/v1`
-  : "/api/v1";
+const getApiBaseUrl = (): string => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (!envUrl || typeof envUrl !== "string" || !envUrl.trim()) {
+    return "/api/v1";
+  }
+  const clean = envUrl.trim().replace(/\/+$/, "");
+  if (clean.endsWith("/api/v1")) {
+    return clean;
+  }
+  return `${clean}/api/v1`;
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 /**
  * Primary Axios client configured with credentials for HttpOnly cookie authentication
