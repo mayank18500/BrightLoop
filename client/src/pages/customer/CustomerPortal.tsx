@@ -44,22 +44,22 @@ export const CustomerPortal: React.FC<CustomerPortalProps> = ({ embedded = false
   }, [tab]);
 
   return (
-    <div className={embedded ? "space-y-6" : "min-h-screen bg-slate-950 text-slate-100 flex flex-col"}>
+    <div className={embedded ? "space-y-6" : "min-h-screen bg-[#FCFCFA] text-[#263247] flex flex-col"}>
       {/* Top Navigation - only if standalone */}
       {!embedded && (
-        <header className="border-b border-slate-800 bg-slate-900/90 backdrop-blur px-6 py-3.5 flex items-center justify-between sticky top-0 z-50">
+        <header className="border-b border-[#E2E7EF] bg-white px-6 py-3.5 flex items-center justify-between sticky top-0 z-50 shadow-sm">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-lg bg-emerald-600 flex items-center justify-center font-bold text-white shadow-lg shadow-emerald-500/20">
+            <div className="h-9 w-9 rounded-lg bg-[#2563EB] flex items-center justify-center font-bold text-white shadow-sm">
               BL
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-base font-semibold text-white leading-none">BrightLoop</span>
-                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span className="text-base font-bold text-[#172554] leading-none">BrightLoop</span>
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-[#1D4ED8] border border-blue-200">
                   CUSTOMER PORTAL
                 </span>
               </div>
-              <p className="text-xs text-slate-400 mt-1">
+              <p className="text-xs text-[#596579] mt-1">
                 {customer?.companyName || "Commercial Client Workspace"}
               </p>
             </div>
@@ -67,14 +67,14 @@ export const CustomerPortal: React.FC<CustomerPortalProps> = ({ embedded = false
 
           <div className="flex items-center gap-4">
             <div className="hidden sm:block text-right">
-              <div className="text-xs font-semibold text-white">{user?.name}</div>
-              <div className="text-[11px] text-slate-400">{user?.email}</div>
+              <div className="text-xs font-semibold text-[#172554]">{user?.name}</div>
+              <div className="text-[11px] text-[#596579]">{user?.email}</div>
             </div>
             <button
               onClick={() => logout()}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900 hover:bg-slate-800 text-xs text-slate-300 font-medium transition cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E2E7EF] bg-white hover:bg-[#F8FAFC] text-xs text-[#596579] hover:text-[#172554] font-medium transition cursor-pointer shadow-sm"
             >
-              <LogOut className="h-3.5 w-3.5 text-slate-400" />
+              <LogOut className="h-3.5 w-3.5 text-[#596579]" />
               Sign Out
             </button>
           </div>
@@ -85,8 +85,8 @@ export const CustomerPortal: React.FC<CustomerPortalProps> = ({ embedded = false
       <div className={embedded ? "" : "flex-1 flex"}>
         {/* Sidebar Nav - only if standalone */}
         {!embedded && (
-          <aside className="w-64 border-r border-slate-800 bg-slate-900/40 p-4 space-y-1 hidden md:block">
-            <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">
+          <aside className="w-64 border-r border-[#E2E7EF] bg-white p-4 space-y-1 hidden md:block">
+            <div className="text-[11px] font-bold text-[#596579] uppercase tracking-wider px-3 mb-2">
               My Services
             </div>
             {[
@@ -106,10 +106,10 @@ export const CustomerPortal: React.FC<CustomerPortalProps> = ({ embedded = false
                       item.id as "overview" | "proposals" | "subscriptions" | "invoices" | "payments"
                     )
                   }
-                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition cursor-pointer ${
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-semibold transition cursor-pointer ${
                     isActive
-                      ? "bg-emerald-600 text-white shadow-md shadow-emerald-500/20"
-                      : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/60"
+                      ? "bg-[#2563EB] text-white shadow-sm"
+                      : "text-[#596579] hover:text-[#172554] hover:bg-[#F8FAFC]"
                   }`}
                 >
                   <Icon className="h-4 w-4" />
@@ -126,54 +126,54 @@ export const CustomerPortal: React.FC<CustomerPortalProps> = ({ embedded = false
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-2xl font-bold text-white tracking-tight">Customer Portal</h2>
-                  <p className="text-xs text-slate-400 mt-1">
+                  <h2 className="text-2xl font-bold text-[#172554] tracking-tight">Customer Portal</h2>
+                  <p className="text-sm text-[#596579] mt-1">
                     View your active software contracts, recurring renewals, and invoice settlement history.
                   </p>
                 </div>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-[#15803D] border border-emerald-200">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#15803D]" />
                   Verified Client
                 </span>
               </div>
 
               {/* Customer Profile Card */}
-              <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6 space-y-4">
-                <h3 className="text-base font-semibold text-white flex items-center gap-2">
-                  <Building2 className="h-4 w-4 text-emerald-400" />
+              <div className="rounded-xl border border-[#E2E7EF] bg-white p-6 space-y-4 shadow-sm">
+                <h3 className="text-base font-bold text-[#172554] flex items-center gap-2">
+                  <Building2 className="h-4 w-4 text-[#2563EB]" />
                   Registered Commercial Entity
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                  <div className="p-4 rounded-lg border border-slate-800 bg-slate-950/60 space-y-2">
-                    <div className="flex items-center gap-2 text-slate-400 font-medium">
-                      <User className="h-4 w-4 text-slate-500" />
+                  <div className="p-4 rounded-xl border border-[#E2E7EF] bg-[#F8FAFC] space-y-2">
+                    <div className="flex items-center gap-2 text-[#596579] font-bold uppercase tracking-wider text-[11px]">
+                      <User className="h-4 w-4 text-[#2563EB]" />
                       Contact Person
                     </div>
-                    <div className="text-sm font-semibold text-white">{customer?.contactName || user?.name}</div>
-                    <div className="flex items-center gap-2 text-slate-400 pt-1">
-                      <Mail className="h-3.5 w-3.5 text-slate-500" />
+                    <div className="text-base font-bold text-[#172554]">{customer?.contactName || user?.name}</div>
+                    <div className="flex items-center gap-2 text-[#596579] pt-1">
+                      <Mail className="h-3.5 w-3.5 text-[#596579]" />
                       {customer?.email || user?.email}
                     </div>
                     {customer?.phone && (
-                      <div className="flex items-center gap-2 text-slate-400">
-                        <Phone className="h-3.5 w-3.5 text-slate-500" />
+                      <div className="flex items-center gap-2 text-[#596579]">
+                        <Phone className="h-3.5 w-3.5 text-[#596579]" />
                         {customer.phone}
                       </div>
                     )}
                   </div>
 
-                  <div className="p-4 rounded-lg border border-slate-800 bg-slate-950/60 space-y-2">
-                    <div className="flex items-center gap-2 text-slate-400 font-medium">
-                      <Receipt className="h-4 w-4 text-slate-500" />
+                  <div className="p-4 rounded-xl border border-[#E2E7EF] bg-[#F8FAFC] space-y-2">
+                    <div className="flex items-center gap-2 text-[#596579] font-bold uppercase tracking-wider text-[11px]">
+                      <Receipt className="h-4 w-4 text-[#2563EB]" />
                       Billing & Tax Details
                     </div>
-                    <div className="text-sm font-semibold text-white">{customer?.companyName}</div>
-                    <div className="text-slate-400 pt-1">
-                      Tax / GST ID: <span className="font-mono text-slate-300">{customer?.taxId || "Not Registered"}</span>
+                    <div className="text-base font-bold text-[#172554]">{customer?.companyName}</div>
+                    <div className="text-[#596579] pt-1">
+                      Tax / GST ID: <span className="font-mono font-semibold text-[#172554]">{customer?.taxId || "Not Registered"}</span>
                     </div>
-                    <div className="flex items-start gap-2 text-slate-400 pt-1">
-                      <MapPin className="h-3.5 w-3.5 text-slate-500 shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-2 text-[#596579] pt-1">
+                      <MapPin className="h-3.5 w-3.5 text-[#596579] shrink-0 mt-0.5" />
                       <span>{customer?.billingAddress || "No billing address provided"}</span>
                     </div>
                   </div>
@@ -188,9 +188,9 @@ export const CustomerPortal: React.FC<CustomerPortalProps> = ({ embedded = false
           {activeTab === "payments" && <CustomerPaymentsView />}
 
           {activeTab !== "overview" && activeTab !== "proposals" && activeTab !== "subscriptions" && activeTab !== "invoices" && activeTab !== "payments" && (
-            <div className="p-12 text-center border border-slate-800 rounded-xl bg-slate-900/30">
-              <h3 className="text-sm font-semibold text-slate-300 capitalize">{activeTab}</h3>
-              <p className="text-xs text-slate-500 mt-1">Select from the sidebar to review your account details.</p>
+            <div className="p-12 text-center border border-[#E2E7EF] rounded-xl bg-white shadow-sm">
+              <h3 className="text-sm font-semibold text-[#172554] capitalize">{activeTab}</h3>
+              <p className="text-xs text-[#596579] mt-1">Select from the navigation to review your account details.</p>
             </div>
           )}
         </main>
@@ -210,7 +210,6 @@ const CustomerProposalsView: React.FC = () => {
     try {
       setLoading(true);
       const res = await quotationService.getQuotations();
-      // Filter out internal DRAFTs if any - customer only sees SENT, CONFIRMED, EXPIRED, CANCELLED
       setQuotations(res.quotations.filter((q) => q.status !== "DRAFT"));
     } catch (err: any) {
       console.error("Failed to load customer proposals", err);
@@ -247,102 +246,102 @@ const CustomerProposalsView: React.FC = () => {
     <div className="space-y-6">
       {feedback && (
         <div
-          className={`p-4 rounded-xl border flex items-center justify-between ${
+          className={`p-4 rounded-xl border flex items-center justify-between transition-all ${
             feedback.type === "success"
-              ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
-              : "bg-rose-500/10 border-rose-500/30 text-rose-300"
+              ? "bg-emerald-50 border-emerald-200 text-[#15803D]"
+              : "bg-rose-50 border-rose-200 text-[#B91C1C]"
           }`}
         >
-          <div className="flex items-center gap-2 text-xs font-medium">
+          <div className="flex items-center gap-2 text-xs font-semibold">
             {feedback.type === "success" ? (
-              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+              <CheckCircle2 className="h-4 w-4 text-[#15803D]" />
             ) : (
-              <AlertCircle className="h-4 w-4 text-rose-400" />
+              <AlertCircle className="h-4 w-4 text-[#B91C1C]" />
             )}
             {feedback.text}
           </div>
-          <button onClick={() => setFeedback(null)} className="text-slate-400 hover:text-white">
+          <button onClick={() => setFeedback(null)} className="text-[#6B7280] hover:text-[#172554] p-1 rounded-lg">
             <X className="h-4 w-4" />
           </button>
         </div>
       )}
 
       <div>
-        <h3 className="text-xl font-bold text-white flex items-center gap-2">
-          <FileText className="h-5 w-5 text-emerald-400" />
+        <h2 className="text-2xl font-bold text-[#172554] flex items-center gap-2.5">
+          <FileText className="h-6 w-6 text-[#2563EB]" />
           Software Proposals & Quotations
-        </h3>
-        <p className="text-xs text-slate-400 mt-1">
+        </h2>
+        <p className="text-sm text-[#596579] mt-1">
           Review formal software proposals issued to your organization, agreed unit prices, and confirm contract activation.
         </p>
       </div>
 
       {loading ? (
-        <div className="p-12 text-center text-slate-500">
-          <Loader2 className="h-6 w-6 animate-spin mx-auto text-emerald-500 mb-2" />
+        <div className="p-12 text-center text-[#596579] bg-white rounded-xl border border-[#E2E7EF] shadow-sm">
+          <Loader2 className="h-6 w-6 animate-spin mx-auto text-[#2563EB] mb-2" />
           Loading your proposals...
         </div>
       ) : quotations.length === 0 ? (
-        <div className="p-12 text-center rounded-xl border border-slate-800 bg-slate-900/30 text-slate-400">
-          <FileText className="h-8 w-8 text-slate-600 mx-auto mb-2" />
-          <div className="text-sm font-semibold text-slate-300">No Proposals Found</div>
-          <p className="text-xs text-slate-500 mt-1">
+        <div className="p-12 text-center rounded-xl border border-[#E2E7EF] bg-white text-[#596579] shadow-sm">
+          <FileText className="h-8 w-8 text-[#687386] mx-auto mb-2" />
+          <div className="text-base font-semibold text-[#172554]">No Proposals Found</div>
+          <p className="text-xs text-[#596579] mt-1">
             You currently have no pending proposals. Please contact our sales team to request a quote.
           </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {quotations.map((q) => {
-            const hasSub = !!(q.subscriptions && q.subscriptions.length > 0);
+            const hasSub = !!(q.subscriptions && q.subscriptions.length > 0) || !!q.subscription;
             return (
               <div
                 key={q.id}
                 onClick={() => setSelectedQuotation(q)}
-                className="p-5 rounded-xl border border-slate-800 bg-slate-900/40 hover:bg-slate-900/70 hover:border-slate-700 transition cursor-pointer space-y-4"
+                className="p-5 rounded-xl border border-[#E2E7EF] bg-white hover:border-[#CBD5E1] transition cursor-pointer space-y-4 shadow-sm"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-emerald-400 text-sm">{q.quotationNumber}</span>
+                  <span className="font-bold text-[#2563EB] text-sm">{q.quotationNumber}</span>
                   {hasSub ? (
-                    <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-50 text-[#7C3AED] border border-purple-200">
                       ACTIVE CONTRACT
                     </span>
                   ) : q.status === "SENT" ? (
-                    <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-[#1D4ED8] border border-blue-200">
                       PENDING YOUR REVIEW
                     </span>
                   ) : q.status === "CONFIRMED" ? (
-                    <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-[#15803D] border border-emerald-200">
                       CONFIRMED
                     </span>
                   ) : (
-                    <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-400">
+                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#F1F5F9] text-[#475569] border border-[#E2E7EF]">
                       {q.status}
                     </span>
                   )}
                 </div>
 
                 <div className="space-y-1">
-                  <div className="text-xs text-slate-400">Recurrence Plan:</div>
-                  <div className="text-sm font-semibold text-white">
+                  <div className="text-xs text-[#596579]">Recurrence Plan:</div>
+                  <div className="text-sm font-bold text-[#172554]">
                     {q.plan ? q.plan.name : "Custom Contract"}
                   </div>
                   {q.plan && (
-                    <div className="text-[11px] text-slate-400">
+                    <div className="text-[11px] text-[#596579]">
                       Billed {q.plan.billingFrequency.toLowerCase()}
                     </div>
                   )}
                 </div>
 
-                <div className="border-t border-slate-800/80 pt-3 flex items-center justify-between">
+                <div className="border-t border-[#E2E7EF] pt-3 flex items-center justify-between">
                   <div>
-                    <div className="text-[10px] text-slate-500 uppercase font-bold">Total Contract Value</div>
-                    <div className="text-base font-bold text-white">
+                    <div className="text-[10px] text-[#596579] uppercase font-bold">Total Contract Value</div>
+                    <div className="text-base font-bold text-[#172554]">
                       ₹{Number(q.totalAmount).toLocaleString("en-IN", { minimumFractionDigits: 2 })}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-[10px] text-slate-500 uppercase font-bold">Valid Until</div>
-                    <div className="text-xs text-slate-300 font-medium">
+                    <div className="text-[10px] text-[#596579] uppercase font-bold">Valid Until</div>
+                    <div className="text-xs text-[#263247] font-semibold">
                       {new Date(q.expiresAt).toLocaleDateString()}
                     </div>
                   </div>
@@ -355,7 +354,7 @@ const CustomerProposalsView: React.FC = () => {
                       handleAcceptProposal(q.id);
                     }}
                     disabled={actionLoadingId === q.id}
-                    className="w-full py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-1.5 transition cursor-pointer"
+                    className="w-full py-2.5 rounded-lg bg-[#15803D] hover:bg-[#166534] text-white font-semibold text-xs shadow-sm flex items-center justify-center gap-1.5 transition cursor-pointer"
                   >
                     {actionLoadingId === q.id ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
@@ -373,51 +372,51 @@ const CustomerProposalsView: React.FC = () => {
 
       {/* Proposal Details Modal */}
       {selectedQuotation && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl my-8">
-            <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-white border border-[#E2E7EF] rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl my-8">
+            <div className="px-6 py-4 border-b border-[#E2E7EF] bg-[#F8FAFC] rounded-t-2xl flex items-center justify-between">
               <div>
-                <h3 className="text-base font-bold text-white">
+                <h3 className="text-base font-bold text-[#172554]">
                   Proposal {selectedQuotation.quotationNumber}
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-[#596579] mt-0.5">
                   Issued on {new Date(selectedQuotation.createdAt).toLocaleDateString()}
                 </p>
               </div>
               <button
                 onClick={() => setSelectedQuotation(null)}
-                className="text-slate-400 hover:text-white p-1 rounded-lg"
+                className="text-[#6B7280] hover:text-[#172554] p-1.5 rounded-lg hover:bg-white transition"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             <div className="p-6 space-y-5 overflow-y-auto flex-1 text-xs">
-              <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-950/40">
+              <div className="border border-[#E2E7EF] rounded-xl overflow-hidden bg-white shadow-sm">
                 <table className="w-full text-left">
-                  <thead className="bg-slate-900 border-b border-slate-800 text-[10px] text-slate-400 uppercase">
+                  <thead className="bg-[#F8FAFC] border-b border-[#E2E7EF] text-[10px] text-[#344054] font-bold uppercase">
                     <tr>
-                      <th className="px-3 py-2.5">Product</th>
-                      <th className="px-3 py-2.5 text-center">Qty</th>
-                      <th className="px-3 py-2.5 text-right">Agreed Unit Price</th>
-                      <th className="px-3 py-2.5 text-right">Total</th>
+                      <th className="px-3.5 py-2.5">Product</th>
+                      <th className="px-3.5 py-2.5 text-center">Qty</th>
+                      <th className="px-3.5 py-2.5 text-right">Agreed Unit Price</th>
+                      <th className="px-3.5 py-2.5 text-right">Total</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800/60 text-slate-200">
+                  <tbody className="divide-y divide-[#E2E7EF] text-[#263247]">
                     {(selectedQuotation.items || []).map((it) => (
-                      <tr key={it.id}>
-                        <td className="px-3 py-2.5">
-                          <div className="font-semibold text-white">{it.product?.name || "Product"}</div>
+                      <tr key={it.id} className="hover:bg-[#F8FAFC]">
+                        <td className="px-3.5 py-2.5">
+                          <div className="font-semibold text-[#172554]">{it.product?.name || "Product"}</div>
                           {it.variant && (
-                            <div className="text-[10px] text-slate-400">Tier: {it.variant.name}</div>
+                            <div className="text-[10px] text-[#596579]">Tier: {it.variant.name}</div>
                           )}
                         </td>
-                        <td className="px-3 py-2.5 text-center">{it.quantity}</td>
-                        <td className="px-3 py-2.5 text-right font-mono">
+                        <td className="px-3.5 py-2.5 text-center font-bold text-[#172554]">{it.quantity}</td>
+                        <td className="px-3.5 py-2.5 text-right font-mono text-[#263247]">
                           ₹{Number(it.unitPrice).toFixed(2)}
                         </td>
-                        <td className="px-3 py-2.5 text-right font-mono font-semibold text-white">
-                          ₹{Number(it.total).toFixed(2)}
+                        <td className="px-3.5 py-2.5 text-right font-mono font-bold text-[#172554]">
+                          ₹{Number(it.total || Number(it.unitPrice) * it.quantity).toFixed(2)}
                         </td>
                       </tr>
                     ))}
@@ -426,24 +425,31 @@ const CustomerProposalsView: React.FC = () => {
               </div>
 
               <div className="flex justify-end">
-                <div className="w-64 space-y-1.5 p-3 rounded-xl border border-slate-800 bg-slate-950/60">
-                  <div className="flex justify-between text-slate-400">
+                <div className="w-64 space-y-2 p-3.5 rounded-xl border border-[#E2E7EF] bg-[#F8FAFC]">
+                  <div className="flex justify-between text-[#596579]">
                     <span>Subtotal:</span>
-                    <span className="font-mono text-white">₹{Number(selectedQuotation.subtotal).toFixed(2)}</span>
+                    <span className="font-mono font-semibold text-[#172554]">
+                      ₹
+                      {(
+                        Number(selectedQuotation.totalAmount) -
+                        Number(selectedQuotation.taxAmount) +
+                        Number(selectedQuotation.discountAmount)
+                      ).toFixed(2)}
+                    </span>
                   </div>
-                  <div className="flex justify-between text-slate-400">
+                  <div className="flex justify-between text-[#596579]">
                     <span>Tax:</span>
-                    <span className="font-mono text-white">₹{Number(selectedQuotation.taxAmount).toFixed(2)}</span>
+                    <span className="font-mono font-semibold text-[#172554]">₹{Number(selectedQuotation.taxAmount).toFixed(2)}</span>
                   </div>
                   {Number(selectedQuotation.discountAmount) > 0 && (
-                    <div className="flex justify-between text-emerald-400">
+                    <div className="flex justify-between text-[#15803D] font-semibold">
                       <span>Discount:</span>
                       <span className="font-mono">-₹{Number(selectedQuotation.discountAmount).toFixed(2)}</span>
                     </div>
                   )}
-                  <div className="border-t border-slate-800 pt-2 flex justify-between font-bold text-white text-sm">
+                  <div className="border-t border-[#E2E7EF] pt-2 flex justify-between font-bold text-[#172554] text-sm">
                     <span>Grand Total:</span>
-                    <span className="text-emerald-400">
+                    <span className="text-[#15803D]">
                       ₹{Number(selectedQuotation.totalAmount).toLocaleString("en-IN", {
                         minimumFractionDigits: 2,
                       })}
@@ -453,10 +459,10 @@ const CustomerProposalsView: React.FC = () => {
               </div>
             </div>
 
-            <div className="px-6 py-4 border-t border-slate-800 flex items-center justify-between">
+            <div className="px-6 py-4 border-t border-[#E2E7EF] bg-[#F8FAFC] rounded-b-2xl flex items-center justify-between">
               <button
                 onClick={() => setSelectedQuotation(null)}
-                className="px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-300 text-xs font-medium cursor-pointer"
+                className="px-4 py-2 rounded-lg border border-[#E2E7EF] hover:bg-white text-[#596579] text-xs font-semibold cursor-pointer transition shadow-sm"
               >
                 Close
               </button>
@@ -464,7 +470,7 @@ const CustomerProposalsView: React.FC = () => {
                 <button
                   onClick={() => handleAcceptProposal(selectedQuotation.id)}
                   disabled={actionLoadingId === selectedQuotation.id}
-                  className="px-5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-lg shadow-emerald-500/20 flex items-center gap-1.5 transition cursor-pointer"
+                  className="px-5 py-2 rounded-lg bg-[#15803D] hover:bg-[#166534] text-white font-semibold text-xs shadow-sm flex items-center gap-1.5 transition cursor-pointer"
                 >
                   <CheckCircle2 className="h-4 w-4" />
                   Accept & Confirm Proposal
@@ -538,47 +544,47 @@ const CustomerSubscriptionsView: React.FC = () => {
     <div className="space-y-6">
       {feedback && (
         <div
-          className={`p-4 rounded-xl border flex items-center justify-between ${
+          className={`p-4 rounded-xl border flex items-center justify-between transition-all ${
             feedback.type === "success"
-              ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
-              : "bg-rose-500/10 border-rose-500/30 text-rose-300"
+              ? "bg-emerald-50 border-emerald-200 text-[#15803D]"
+              : "bg-rose-50 border-rose-200 text-[#B91C1C]"
           }`}
         >
-          <div className="flex items-center gap-2 text-xs font-medium">
+          <div className="flex items-center gap-2 text-xs font-semibold">
             {feedback.type === "success" ? (
-              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+              <CheckCircle2 className="h-4 w-4 text-[#15803D]" />
             ) : (
-              <AlertCircle className="h-4 w-4 text-rose-400" />
+              <AlertCircle className="h-4 w-4 text-[#B91C1C]" />
             )}
             {feedback.text}
           </div>
-          <button onClick={() => setFeedback(null)} className="text-slate-400 hover:text-white">
+          <button onClick={() => setFeedback(null)} className="text-[#6B7280] hover:text-[#172554] p-1 rounded-lg">
             <X className="h-4 w-4" />
           </button>
         </div>
       )}
 
       <div>
-        <h3 className="text-xl font-bold text-white flex items-center gap-2">
-          <ShieldCheck className="h-5 w-5 text-emerald-400" />
+        <h2 className="text-2xl font-bold text-[#172554] flex items-center gap-2.5">
+          <ShieldCheck className="h-6 w-6 text-[#7C3AED]" />
           My Active Subscriptions & Contracts
-        </h3>
-        <p className="text-xs text-slate-400 mt-1">
+        </h2>
+        <p className="text-sm text-[#596579] mt-1">
           Review your recurring software licenses, fair billing renewal schedules, and manage lifecycle pauses.
         </p>
       </div>
 
       {loading ? (
-        <div className="p-12 text-center text-slate-500">
-          <Loader2 className="h-6 w-6 animate-spin mx-auto text-emerald-500 mb-2" />
+        <div className="p-12 text-center text-[#596579] bg-white rounded-xl border border-[#E2E7EF] shadow-sm">
+          <Loader2 className="h-6 w-6 animate-spin mx-auto text-[#7C3AED] mb-2" />
           Loading your active contracts...
         </div>
       ) : subscriptions.length === 0 ? (
-        <div className="p-12 text-center rounded-xl border border-slate-800 bg-slate-900/30 text-slate-400">
-          <ShieldCheck className="h-8 w-8 text-slate-600 mx-auto mb-2" />
-          <div className="text-sm font-semibold text-slate-300">No Active Subscriptions</div>
-          <p className="text-xs text-slate-500 mt-1">
-            You do not currently have any active subscription contracts. Check "Proposals & Quotes" to review pending proposals.
+        <div className="p-12 text-center rounded-xl border border-[#E2E7EF] bg-white text-[#596579] shadow-sm">
+          <ShieldCheck className="h-8 w-8 text-[#687386] mx-auto mb-2" />
+          <div className="text-base font-semibold text-[#172554]">No Active Subscriptions</div>
+          <p className="text-xs text-[#596579] mt-1">
+            You do not currently have any active subscription contracts. Check &quot;Proposals & Quotes&quot; to review pending proposals.
           </p>
         </div>
       ) : (
@@ -593,46 +599,46 @@ const CustomerSubscriptionsView: React.FC = () => {
               <div
                 key={sub.id}
                 onClick={() => setSelectedSub(sub)}
-                className="p-5 rounded-xl border border-slate-800 bg-slate-900/40 hover:bg-slate-900/70 hover:border-slate-700 transition cursor-pointer space-y-4"
+                className="p-5 rounded-xl border border-[#E2E7EF] bg-white hover:border-[#CBD5E1] transition cursor-pointer space-y-4 shadow-sm"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-emerald-400 text-sm">{sub.subscriptionNumber}</span>
+                  <span className="font-bold text-[#7C3AED] text-sm">{sub.subscriptionNumber}</span>
                   {sub.status === "ACTIVE" ? (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-[#15803D] border border-emerald-200">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#15803D]" />
                       ACTIVE
                     </span>
                   ) : sub.status === "PAUSED" ? (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                      <Clock className="h-3 w-3" />
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-[#B45309] border border-amber-200">
+                      <Clock className="h-3.5 w-3.5" />
                       PAUSED
                     </span>
                   ) : (
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400">
+                    <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#F1F5F9] text-[#475569] border border-[#E2E7EF]">
                       {sub.status}
                     </span>
                   )}
                 </div>
 
                 <div className="space-y-1">
-                  <div className="text-xs text-slate-400">Plan:</div>
-                  <div className="text-sm font-semibold text-white">{sub.plan?.name}</div>
-                  <div className="text-[11px] text-slate-400">
+                  <div className="text-xs text-[#596579]">Plan:</div>
+                  <div className="text-sm font-bold text-[#172554]">{sub.plan?.name}</div>
+                  <div className="text-[11px] text-[#596579]">
                     Billed every {sub.plan?.billingInterval} {sub.plan?.billingFrequency.toLowerCase()}
                   </div>
                 </div>
 
-                <div className="border-t border-slate-800/80 pt-3 flex items-center justify-between">
+                <div className="border-t border-[#E2E7EF] pt-3 flex items-center justify-between">
                   <div>
-                    <div className="text-[10px] text-slate-500 uppercase font-bold">Recurring Value</div>
-                    <div className="text-base font-bold text-white">
+                    <div className="text-[10px] text-[#596579] uppercase font-bold">Recurring Value</div>
+                    <div className="text-base font-bold text-[#172554]">
                       ₹{contractTotal.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-[10px] text-slate-500 uppercase font-bold">Next Billing</div>
-                    <div className="text-xs text-slate-300 font-medium flex items-center gap-1 justify-end">
-                      <Calendar className="h-3 w-3 text-slate-500" />
+                    <div className="text-[10px] text-[#596579] uppercase font-bold">Next Billing</div>
+                    <div className="text-xs text-[#263247] font-semibold flex items-center gap-1 justify-end">
+                      <Calendar className="h-3.5 w-3.5 text-[#596579]" />
                       {new Date(sub.nextBillingDate).toLocaleDateString()}
                     </div>
                   </div>
@@ -647,7 +653,7 @@ const CustomerSubscriptionsView: React.FC = () => {
                     <button
                       onClick={() => handlePause(sub.id)}
                       disabled={actionLoadingId === sub.id}
-                      className="px-3 py-1.5 rounded-lg border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 text-xs font-medium flex items-center gap-1 transition cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 text-[#B45309] text-xs font-semibold flex items-center gap-1 transition cursor-pointer shadow-sm"
                     >
                       <Pause className="h-3.5 w-3.5" />
                       Pause Billing
@@ -658,7 +664,7 @@ const CustomerSubscriptionsView: React.FC = () => {
                     <button
                       onClick={() => handleResume(sub.id)}
                       disabled={actionLoadingId === sub.id}
-                      className="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer"
+                      className="px-4 py-1.5 rounded-lg bg-[#15803D] hover:bg-[#166534] text-white text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer shadow-sm"
                     >
                       <Play className="h-3.5 w-3.5" />
                       Resume Contract
@@ -673,50 +679,50 @@ const CustomerSubscriptionsView: React.FC = () => {
 
       {/* Subscription Detail Modal */}
       {selectedSub && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl my-8">
-            <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-white border border-[#E2E7EF] rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl my-8">
+            <div className="px-6 py-4 border-b border-[#E2E7EF] bg-[#F8FAFC] rounded-t-2xl flex items-center justify-between">
               <div>
-                <h3 className="text-base font-bold text-white">
+                <h3 className="text-base font-bold text-[#172554]">
                   Contract {selectedSub.subscriptionNumber}
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-[#596579] mt-0.5">
                   Plan: {selectedSub.plan?.name} • Terms: {selectedSub.paymentTerms}
                 </p>
               </div>
               <button
                 onClick={() => setSelectedSub(null)}
-                className="text-slate-400 hover:text-white p-1 rounded-lg"
+                className="text-[#6B7280] hover:text-[#172554] p-1.5 rounded-lg hover:bg-white transition"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             <div className="p-6 space-y-5 overflow-y-auto flex-1 text-xs">
-              <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-950/40">
+              <div className="border border-[#E2E7EF] rounded-xl overflow-hidden bg-white shadow-sm">
                 <table className="w-full text-left">
-                  <thead className="bg-slate-900 border-b border-slate-800 text-[10px] text-slate-400 uppercase">
+                  <thead className="bg-[#F8FAFC] border-b border-[#E2E7EF] text-[10px] text-[#344054] font-bold uppercase">
                     <tr>
-                      <th className="px-3 py-2.5">Licensed Product</th>
-                      <th className="px-3 py-2.5 text-center">Seats / Qty</th>
-                      <th className="px-3 py-2.5 text-right">Agreed Rate</th>
-                      <th className="px-3 py-2.5 text-right">Total</th>
+                      <th className="px-3.5 py-2.5">Licensed Product</th>
+                      <th className="px-3.5 py-2.5 text-center">Seats / Qty</th>
+                      <th className="px-3.5 py-2.5 text-right">Agreed Rate</th>
+                      <th className="px-3.5 py-2.5 text-right">Total</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800/60 text-slate-200">
+                  <tbody className="divide-y divide-[#E2E7EF] text-[#263247]">
                     {(selectedSub.items || []).map((it) => (
-                      <tr key={it.id}>
-                        <td className="px-3 py-2.5">
-                          <div className="font-semibold text-white">{it.product?.name || "Product"}</div>
+                      <tr key={it.id} className="hover:bg-[#F8FAFC]">
+                        <td className="px-3.5 py-2.5">
+                          <div className="font-semibold text-[#172554]">{it.product?.name || "Product"}</div>
                           {it.variant && (
-                            <div className="text-[10px] text-slate-400">Variant: {it.variant.name}</div>
+                            <div className="text-[10px] text-[#596579]">Variant: {it.variant.name}</div>
                           )}
                         </td>
-                        <td className="px-3 py-2.5 text-center">{it.quantity}</td>
-                        <td className="px-3 py-2.5 text-right font-mono">
+                        <td className="px-3.5 py-2.5 text-center font-bold text-[#172554]">{it.quantity}</td>
+                        <td className="px-3.5 py-2.5 text-right font-mono text-[#263247]">
                           ₹{Number(it.unitPrice).toFixed(2)}
                         </td>
-                        <td className="px-3 py-2.5 text-right font-mono font-semibold text-white">
+                        <td className="px-3.5 py-2.5 text-right font-mono font-bold text-[#172554]">
                           ₹{(Number(it.unitPrice) * it.quantity).toFixed(2)}
                         </td>
                       </tr>
@@ -725,25 +731,25 @@ const CustomerSubscriptionsView: React.FC = () => {
                 </table>
               </div>
 
-              <div className="p-4 rounded-xl border border-slate-800 bg-slate-950/60 space-y-1">
-                <div className="text-slate-400">
+              <div className="p-4 rounded-xl border border-[#E2E7EF] bg-[#F8FAFC] space-y-1">
+                <div className="text-[#596579]">
                   Next Scheduled Billing:{" "}
-                  <span className="text-white font-semibold">
+                  <span className="text-[#172554] font-semibold">
                     {new Date(selectedSub.nextBillingDate).toLocaleDateString()}
                   </span>
                 </div>
                 {selectedSub.pausedAt && (
-                  <div className="text-amber-400">
+                  <div className="text-[#B45309] font-medium">
                     Paused on: {new Date(selectedSub.pausedAt).toLocaleDateString()}
                   </div>
                 )}
               </div>
             </div>
 
-            <div className="px-6 py-4 border-t border-slate-800 flex items-center justify-end">
+            <div className="px-6 py-4 border-t border-[#E2E7EF] bg-[#F8FAFC] rounded-b-2xl flex items-center justify-end">
               <button
                 onClick={() => setSelectedSub(null)}
-                className="px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-300 text-xs font-medium cursor-pointer"
+                className="px-4 py-2 rounded-lg border border-[#E2E7EF] hover:bg-white text-[#596579] text-xs font-semibold cursor-pointer transition shadow-sm"
               >
                 Close
               </button>
@@ -764,7 +770,6 @@ const CustomerInvoicesView: React.FC = () => {
     try {
       setLoading(true);
       const res = await invoiceService.getInvoices();
-      // Only show CONFIRMED, PAID, CANCELLED to customers (exclude internal DRAFTs)
       setInvoices(res.data.filter((inv) => inv.status !== "DRAFT"));
     } catch (err: any) {
       console.error("Failed to load customer invoices", err);
@@ -797,8 +802,8 @@ const CustomerInvoicesView: React.FC = () => {
   const getBadge = (status: Invoice["status"], isOverdue?: boolean) => {
     if (isOverdue && status === "CONFIRMED") {
       return (
-        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/30 animate-pulse">
-          <AlertTriangle className="h-3 w-3" />
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-[#B91C1C] border border-rose-200">
+          <AlertTriangle className="h-3.5 w-3.5" />
           OVERDUE
         </span>
       );
@@ -806,22 +811,22 @@ const CustomerInvoicesView: React.FC = () => {
     switch (status) {
       case "CONFIRMED":
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/30">
-            <Clock className="h-3 w-3" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-[#1D4ED8] border border-blue-200">
+            <Clock className="h-3.5 w-3.5" />
             PAYMENT DUE
           </span>
         );
       case "PAID":
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-            <CheckCircle2 className="h-3 w-3" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-[#15803D] border border-emerald-200">
+            <CheckCircle2 className="h-3.5 w-3.5" />
             PAID
           </span>
         );
       case "CANCELLED":
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-500/10 text-slate-400 border border-slate-500/30">
-            <X className="h-3 w-3" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#F1F5F9] text-[#64748B] border border-[#E2E7EF]">
+            <X className="h-3.5 w-3.5" />
             CANCELLED
           </span>
         );
@@ -834,70 +839,70 @@ const CustomerInvoicesView: React.FC = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
-            <Receipt className="h-5 w-5 text-emerald-400" />
+          <h2 className="text-2xl font-bold text-[#172554] tracking-tight flex items-center gap-2.5">
+            <Receipt className="h-6 w-6 text-[#2563EB]" />
             My Invoices & Billing Statements
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-sm text-[#596579] mt-1">
             Review billing statements, verify tax breakdowns, and inspect payment receipts.
           </p>
         </div>
       </div>
 
       {/* Metrics Ribbon */}
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/60">
-          <div className="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Total Invoiced</div>
-          <div className="text-xl font-bold text-white mt-1">₹{totalBilled.toFixed(2)}</div>
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-3.5">
+        <div className="p-4 rounded-xl border border-[#E2E7EF] bg-white shadow-sm">
+          <div className="text-xs font-semibold text-[#596579] uppercase tracking-wider">Total Invoiced</div>
+          <div className="text-2xl font-bold text-[#172554] mt-1.5">₹{totalBilled.toFixed(2)}</div>
         </div>
-        <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/60">
-          <div className="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Total Paid</div>
-          <div className="text-xl font-bold text-emerald-400 mt-1">₹{totalPaid.toFixed(2)}</div>
+        <div className="p-4 rounded-xl border border-emerald-200 bg-emerald-50/40 shadow-sm">
+          <div className="text-xs font-semibold text-[#15803D] uppercase tracking-wider">Total Paid</div>
+          <div className="text-2xl font-bold text-[#15803D] mt-1.5">₹{totalPaid.toFixed(2)}</div>
         </div>
-        <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/60">
-          <div className="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Outstanding Balance</div>
-          <div className="text-xl font-bold text-amber-400 mt-1">₹{totalOutstanding.toFixed(2)}</div>
+        <div className="p-4 rounded-xl border border-amber-200 bg-amber-50/40 shadow-sm">
+          <div className="text-xs font-semibold text-[#B45309] uppercase tracking-wider">Outstanding Balance</div>
+          <div className="text-2xl font-bold text-[#B45309] mt-1.5">₹{totalOutstanding.toFixed(2)}</div>
         </div>
-        <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/60">
-          <div className="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Overdue Invoices</div>
-          <div className={`text-xl font-bold mt-1 ${overdueCount > 0 ? "text-rose-400" : "text-slate-300"}`}>
+        <div className="p-4 rounded-xl border border-rose-200 bg-rose-50/40 shadow-sm">
+          <div className="text-xs font-semibold text-[#B91C1C] uppercase tracking-wider">Overdue Invoices</div>
+          <div className={`text-2xl font-bold mt-1.5 ${overdueCount > 0 ? "text-[#B91C1C]" : "text-[#596579]"}`}>
             {overdueCount}
           </div>
         </div>
       </div>
 
       {/* Invoices List */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/60 overflow-hidden">
+      <div className="rounded-xl border border-[#E2E7EF] bg-white overflow-hidden shadow-sm">
         {loading ? (
-          <div className="p-12 text-center text-slate-400 flex flex-col items-center justify-center">
-            <Loader2 className="h-6 w-6 animate-spin text-emerald-500 mb-2" />
+          <div className="p-12 text-center text-[#596579] flex flex-col items-center justify-center">
+            <Loader2 className="h-6 w-6 animate-spin text-[#2563EB] mb-2" />
             <span className="text-xs">Loading billing statements...</span>
           </div>
         ) : invoices.length === 0 ? (
-          <div className="p-12 text-center text-slate-400">
-            <Receipt className="h-10 w-10 text-slate-600 mx-auto mb-2" />
-            <div className="text-sm font-medium text-slate-300">No Invoices Issued</div>
-            <div className="text-xs text-slate-500 mt-1">
+          <div className="p-12 text-center text-[#596579]">
+            <Receipt className="h-10 w-10 text-[#687386] mx-auto mb-2" />
+            <div className="text-base font-semibold text-[#172554]">No Invoices Issued</div>
+            <div className="text-xs text-[#596579] mt-1">
               Invoices will automatically appear here when generated for your subscriptions.
             </div>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950/60 text-slate-400 uppercase tracking-wider border-b border-slate-800">
+            <table className="w-full text-left text-xs text-[#263247]">
+              <thead className="bg-[#F8FAFC] text-[#344054] font-bold uppercase tracking-wider border-b border-[#E2E7EF] text-[11px]">
                 <tr>
-                  <th className="px-4 py-3 font-semibold">Invoice #</th>
-                  <th className="px-4 py-3 font-semibold">Subscription</th>
-                  <th className="px-4 py-3 font-semibold">Issue Date</th>
-                  <th className="px-4 py-3 font-semibold">Due Date</th>
-                  <th className="px-4 py-3 font-semibold text-right">Total</th>
-                  <th className="px-4 py-3 font-semibold text-right">Paid</th>
-                  <th className="px-4 py-3 font-semibold text-right">Balance</th>
-                  <th className="px-4 py-3 font-semibold">Status</th>
-                  <th className="px-4 py-3 font-semibold text-center">Action</th>
+                  <th className="px-4 py-3.5">Invoice #</th>
+                  <th className="px-4 py-3.5">Subscription</th>
+                  <th className="px-4 py-3.5">Issue Date</th>
+                  <th className="px-4 py-3.5">Due Date</th>
+                  <th className="px-4 py-3.5 text-right">Total</th>
+                  <th className="px-4 py-3.5 text-right">Paid</th>
+                  <th className="px-4 py-3.5 text-right">Balance</th>
+                  <th className="px-4 py-3.5">Status</th>
+                  <th className="px-4 py-3.5 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-[#E2E7EF]">
                 {invoices.map((inv) => {
                   const tot = parseFloat(String(inv.totalAmount)) || 0;
                   const pd = parseFloat(String(inv.amountPaid)) || 0;
@@ -906,33 +911,33 @@ const CustomerInvoicesView: React.FC = () => {
                     inv.status === "CONFIRMED" && new Date(inv.dueDate) < new Date() && bal > 0;
 
                   return (
-                    <tr key={inv.id} className="hover:bg-slate-800/30 transition-colors">
-                      <td className="px-4 py-3 font-mono font-medium text-white">{inv.invoiceNumber}</td>
-                      <td className="px-4 py-3 text-slate-400 font-mono">
+                    <tr key={inv.id} className="hover:bg-[#F8FAFC] transition-colors">
+                      <td className="px-4 py-3.5 font-mono font-bold text-[#2563EB]">{inv.invoiceNumber}</td>
+                      <td className="px-4 py-3.5 text-[#596579] font-mono">
                         {inv.subscription?.subscriptionNumber || "—"}
                       </td>
-                      <td className="px-4 py-3 text-slate-400">
+                      <td className="px-4 py-3.5 text-[#596579]">
                         {new Date(inv.issueDate).toLocaleDateString()}
                       </td>
-                      <td className="px-4 py-3 text-slate-300 font-medium">
+                      <td className="px-4 py-3.5 text-[#263247] font-semibold">
                         {new Date(inv.dueDate).toLocaleDateString()}
                       </td>
-                      <td className="px-4 py-3 text-right font-mono text-white font-medium">
+                      <td className="px-4 py-3.5 text-right font-mono text-[#172554] font-bold">
                         ₹{tot.toFixed(2)}
                       </td>
-                      <td className="px-4 py-3 text-right font-mono text-emerald-400">
+                      <td className="px-4 py-3.5 text-right font-mono text-[#15803D] font-bold">
                         ₹{pd.toFixed(2)}
                       </td>
-                      <td className="px-4 py-3 text-right font-mono font-bold text-white">
-                        <span className={bal > 0 && isOverdue ? "text-rose-400" : ""}>
+                      <td className="px-4 py-3.5 text-right font-mono font-bold text-[#172554]">
+                        <span className={bal > 0 && isOverdue ? "text-[#B91C1C]" : ""}>
                           ₹{bal.toFixed(2)}
                         </span>
                       </td>
-                      <td className="px-4 py-3">{getBadge(inv.status, isOverdue)}</td>
-                      <td className="px-4 py-3 text-center">
+                      <td className="px-4 py-3.5">{getBadge(inv.status, isOverdue)}</td>
+                      <td className="px-4 py-3.5 text-center">
                         <button
                           onClick={() => setSelectedInvoice(inv)}
-                          className="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-medium transition cursor-pointer"
+                          className="px-3 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 text-[#1D4ED8] border border-blue-200 text-xs font-semibold transition cursor-pointer shadow-sm"
                         >
                           View / Print
                         </button>
@@ -948,26 +953,26 @@ const CustomerInvoicesView: React.FC = () => {
 
       {/* Invoice Document Modal */}
       {selectedInvoice && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
-            <div className="p-4 px-6 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-white border border-[#E2E7EF] rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+            <div className="p-4 px-6 border-b border-[#E2E7EF] flex items-center justify-between bg-[#F8FAFC]">
               <div className="flex items-center gap-2">
-                <Receipt className="h-5 w-5 text-emerald-400" />
-                <span className="font-bold text-white text-sm">
+                <Receipt className="h-5 w-5 text-[#2563EB]" />
+                <span className="font-bold text-[#172554] text-base">
                   Invoice {selectedInvoice.invoiceNumber}
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => window.print()}
-                  className="px-3 py-1.5 rounded-lg border border-slate-700 hover:bg-slate-800 text-xs text-slate-300 font-medium flex items-center gap-1.5 cursor-pointer"
+                  className="px-3 py-1.5 rounded-lg border border-[#E2E7EF] hover:bg-white text-xs text-[#172554] font-semibold flex items-center gap-1.5 cursor-pointer shadow-sm"
                 >
-                  <Printer className="h-3.5 w-3.5" />
+                  <Printer className="h-3.5 w-3.5 text-[#596579]" />
                   Print
                 </button>
                 <button
                   onClick={() => setSelectedInvoice(null)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white"
+                  className="p-1.5 rounded-lg text-[#6B7280] hover:text-[#172554] hover:bg-white transition"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -975,47 +980,47 @@ const CustomerInvoicesView: React.FC = () => {
             </div>
 
             <div className="p-6 overflow-y-auto space-y-6 flex-1 text-xs">
-              <div className="flex justify-between items-start border-b border-slate-800 pb-4">
+              <div className="flex justify-between items-start border-b border-[#E2E7EF] pb-4">
                 <div>
-                  <div className="text-lg font-black tracking-tight text-white">
-                    Bright<span className="text-emerald-400">Loop</span>
+                  <div className="text-xl font-black tracking-tight text-[#172554]">
+                    Bright<span className="text-[#2563EB]">Loop</span>
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">Software Subscriptions & Billing</div>
+                  <div className="text-xs text-[#596579] mt-0.5">Software Subscriptions & Billing</div>
                 </div>
                 <div className="text-right">
-                  <div className="font-mono font-bold text-white text-sm">{selectedInvoice.invoiceNumber}</div>
-                  <div className="text-slate-400 mt-1">
+                  <div className="font-mono font-bold text-[#172554] text-sm">{selectedInvoice.invoiceNumber}</div>
+                  <div className="text-[#596579] mt-1 font-medium">
                     Issue Date: {new Date(selectedInvoice.issueDate).toLocaleDateString()}
                   </div>
-                  <div className="text-amber-400 font-medium">
+                  <div className="text-[#B45309] font-bold mt-0.5">
                     Due Date: {new Date(selectedInvoice.dueDate).toLocaleDateString()}
                   </div>
                 </div>
               </div>
 
               {/* Items Table */}
-              <div className="border border-slate-800 rounded-xl overflow-hidden">
-                <table className="w-full text-left">
-                  <thead className="bg-slate-950 text-slate-400 uppercase text-[10px]">
+              <div className="border border-[#E2E7EF] rounded-xl overflow-hidden shadow-sm">
+                <table className="w-full text-left text-xs">
+                  <thead className="bg-[#F8FAFC] text-[#344054] uppercase font-bold text-[10px] border-b border-[#E2E7EF]">
                     <tr>
-                      <th className="px-3 py-2">Item Description</th>
-                      <th className="px-3 py-2 text-center">Qty</th>
-                      <th className="px-3 py-2 text-right">Price</th>
-                      <th className="px-3 py-2 text-right">Tax</th>
-                      <th className="px-3 py-2 text-right">Total</th>
+                      <th className="px-3.5 py-2.5">Item Description</th>
+                      <th className="px-3.5 py-2.5 text-center">Qty</th>
+                      <th className="px-3.5 py-2.5 text-right">Price</th>
+                      <th className="px-3.5 py-2.5 text-right">Tax</th>
+                      <th className="px-3.5 py-2.5 text-right">Total</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800">
+                  <tbody className="divide-y divide-[#E2E7EF] text-[#263247]">
                     {selectedInvoice.items?.map((item) => (
-                      <tr key={item.id} className="text-slate-200">
-                        <td className="px-3 py-2.5 font-medium">{item.description}</td>
-                        <td className="px-3 py-2.5 text-center">{item.quantity}</td>
-                        <td className="px-3 py-2.5 text-right font-mono">
+                      <tr key={item.id} className="hover:bg-[#F8FAFC]">
+                        <td className="px-3.5 py-2.5 font-semibold text-[#172554]">{item.description}</td>
+                        <td className="px-3.5 py-2.5 text-center font-bold text-[#172554]">{item.quantity}</td>
+                        <td className="px-3.5 py-2.5 text-right font-mono">
                           ₹{parseFloat(String(item.unitPrice)).toFixed(2)}
                         </td>
-                        <td className="px-3 py-2.5 text-right text-slate-400 font-mono">{item.taxRate}%</td>
-                        <td className="px-3 py-2.5 text-right font-mono font-bold text-white">
-                          ₹{parseFloat(String(item.totalAmount)).toFixed(2)}
+                        <td className="px-3.5 py-2.5 text-right text-[#596579] font-mono">{item.taxRate}%</td>
+                        <td className="px-3.5 py-2.5 text-right font-mono font-bold text-[#172554]">
+                          ₹{parseFloat(String(item.totalAmount || Number(item.unitPrice) * Number(item.quantity))).toFixed(2)}
                         </td>
                       </tr>
                     ))}
@@ -1025,34 +1030,34 @@ const CustomerInvoicesView: React.FC = () => {
 
               {/* Breakdown */}
               <div className="flex justify-end">
-                <div className="w-60 space-y-1.5 text-slate-400">
+                <div className="w-64 space-y-2 bg-[#F8FAFC] p-4 rounded-xl border border-[#E2E7EF] text-[#596579]">
                   <div className="flex justify-between">
                     <span>Subtotal:</span>
-                    <span className="font-mono text-slate-200">
-                      ₹{parseFloat(String(selectedInvoice.subtotal)).toFixed(2)}
+                    <span className="font-mono font-semibold text-[#172554]">
+                      ₹{parseFloat(String(selectedInvoice.subtotal || selectedInvoice.totalAmount)).toFixed(2)}
                     </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Taxes:</span>
-                    <span className="font-mono text-slate-200">
+                    <span className="font-mono font-semibold text-[#172554]">
                       +₹{parseFloat(String(selectedInvoice.taxAmount)).toFixed(2)}
                     </span>
                   </div>
-                  <div className="border-t border-slate-800 pt-1.5 flex justify-between font-bold text-white">
+                  <div className="border-t border-[#E2E7EF] pt-2 flex justify-between font-bold text-[#172554] text-sm">
                     <span>Total Amount:</span>
                     <span className="font-mono">
                       ₹{parseFloat(String(selectedInvoice.totalAmount)).toFixed(2)}
                     </span>
                   </div>
-                  <div className="flex justify-between text-emerald-400 font-semibold">
+                  <div className="flex justify-between text-[#15803D] font-bold">
                     <span>Amount Paid:</span>
                     <span className="font-mono">
                       ₹{parseFloat(String(selectedInvoice.amountPaid)).toFixed(2)}
                     </span>
                   </div>
-                  <div className="border-t border-slate-800 pt-1.5 flex justify-between font-bold text-amber-400">
+                  <div className="border-t border-[#E2E7EF] pt-2 flex justify-between font-black text-[#172554] text-sm">
                     <span>Balance Due:</span>
-                    <span className="font-mono">
+                    <span className="font-mono text-[#B91C1C]">
                       ₹
                       {Math.max(
                         0,
@@ -1066,25 +1071,25 @@ const CustomerInvoicesView: React.FC = () => {
 
               {/* Allocations */}
               {selectedInvoice.allocations && selectedInvoice.allocations.length > 0 && (
-                <div className="border-t border-slate-800 pt-4">
-                  <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                <div className="border-t border-[#E2E7EF] pt-4">
+                  <div className="text-[11px] font-bold text-[#596579] uppercase tracking-wider mb-2">
                     Settled Payment Transactions
                   </div>
                   <div className="space-y-1.5">
                     {selectedInvoice.allocations.map((alloc) => (
                       <div
                         key={alloc.id}
-                        className="flex justify-between items-center p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300"
+                        className="flex justify-between items-center p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-[#15803D]"
                       >
                         <div className="flex items-center gap-2">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-                          <span className="font-mono">{alloc.payment?.paymentNumber}</span>
-                          <span className="text-slate-400">
+                          <CheckCircle2 className="h-4 w-4 text-[#15803D]" />
+                          <span className="font-mono font-bold">{alloc.payment?.paymentNumber}</span>
+                          <span className="text-[#596579]">
                             ({alloc.payment?.paymentMethod}) on{" "}
                             {new Date(alloc.allocatedAt).toLocaleDateString()}
                           </span>
                         </div>
-                        <span className="font-mono font-bold">
+                        <span className="font-mono font-bold text-[#15803D]">
                           +₹{parseFloat(String(alloc.amount)).toFixed(2)}
                         </span>
                       </div>
@@ -1094,10 +1099,10 @@ const CustomerInvoicesView: React.FC = () => {
               )}
             </div>
 
-            <div className="p-4 px-6 border-t border-slate-800 bg-slate-950/60 flex justify-end">
+            <div className="p-4 px-6 border-t border-[#E2E7EF] bg-[#F8FAFC] flex justify-end">
               <button
                 onClick={() => setSelectedInvoice(null)}
-                className="px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-300 text-xs font-medium cursor-pointer"
+                className="px-4 py-2 rounded-lg border border-[#E2E7EF] hover:bg-white text-[#596579] text-xs font-semibold cursor-pointer transition shadow-sm"
               >
                 Close
               </button>
@@ -1146,97 +1151,97 @@ const CustomerPaymentsView: React.FC = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-bold text-white tracking-tight flex items-center gap-2">
-            <CreditCard className="h-5 w-5 text-emerald-400" />
+          <h2 className="text-2xl font-bold text-[#172554] tracking-tight flex items-center gap-2.5">
+            <CreditCard className="h-6 w-6 text-[#2563EB]" />
             Payment History & Receipts
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-sm text-[#596579] mt-1">
             Complete transaction record of payments and invoice settlement allocations.
           </p>
         </div>
       </div>
 
       {/* Metrics Ribbon */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/60">
-          <div className="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Total Remitted</div>
-          <div className="text-xl font-bold text-white mt-1">₹{totalPaid.toFixed(2)}</div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+        <div className="p-4 rounded-xl border border-[#E2E7EF] bg-white shadow-sm">
+          <div className="text-xs font-semibold text-[#596579] uppercase tracking-wider">Total Remitted</div>
+          <div className="text-2xl font-bold text-[#172554] mt-1.5">₹{totalPaid.toFixed(2)}</div>
         </div>
-        <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/60">
-          <div className="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Settled on Invoices</div>
-          <div className="text-xl font-bold text-emerald-400 mt-1">₹{totalAllocated.toFixed(2)}</div>
+        <div className="p-4 rounded-xl border border-emerald-200 bg-emerald-50/40 shadow-sm">
+          <div className="text-xs font-semibold text-[#15803D] uppercase tracking-wider">Settled on Invoices</div>
+          <div className="text-2xl font-bold text-[#15803D] mt-1.5">₹{totalAllocated.toFixed(2)}</div>
         </div>
-        <div className="p-4 rounded-xl border border-slate-800 bg-slate-900/60">
-          <div className="text-[11px] font-medium text-slate-400 uppercase tracking-wider">Advance / Credit Float</div>
-          <div className="text-xl font-bold text-amber-400 mt-1">₹{totalFloat.toFixed(2)}</div>
+        <div className="p-4 rounded-xl border border-amber-200 bg-amber-50/40 shadow-sm">
+          <div className="text-xs font-semibold text-[#B45309] uppercase tracking-wider">Advance / Credit Float</div>
+          <div className="text-2xl font-bold text-[#B45309] mt-1.5">₹{totalFloat.toFixed(2)}</div>
         </div>
       </div>
 
       {/* Payments List */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/60 overflow-hidden">
+      <div className="rounded-xl border border-[#E2E7EF] bg-white overflow-hidden shadow-sm">
         {loading ? (
-          <div className="p-12 text-center text-slate-400 flex flex-col items-center justify-center">
-            <Loader2 className="h-6 w-6 animate-spin text-emerald-500 mb-2" />
+          <div className="p-12 text-center text-[#596579] flex flex-col items-center justify-center">
+            <Loader2 className="h-6 w-6 animate-spin text-[#2563EB] mb-2" />
             <span className="text-xs">Loading payment transactions...</span>
           </div>
         ) : payments.length === 0 ? (
-          <div className="p-12 text-center text-slate-400">
-            <CreditCard className="h-10 w-10 text-slate-600 mx-auto mb-2" />
-            <div className="text-sm font-medium text-slate-300">No Payments Recorded</div>
-            <div className="text-xs text-slate-500 mt-1">
+          <div className="p-12 text-center text-[#596579]">
+            <CreditCard className="h-10 w-10 text-[#687386] mx-auto mb-2" />
+            <div className="text-base font-semibold text-[#172554]">No Payments Recorded</div>
+            <div className="text-xs text-[#596579] mt-1">
               Your payments will appear here once recorded and verified by our finance team.
             </div>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950/60 text-slate-400 uppercase tracking-wider border-b border-slate-800">
+            <table className="w-full text-left text-xs text-[#263247]">
+              <thead className="bg-[#F8FAFC] text-[#344054] font-bold uppercase tracking-wider border-b border-[#E2E7EF] text-[11px]">
                 <tr>
-                  <th className="px-4 py-3 font-semibold">Payment #</th>
-                  <th className="px-4 py-3 font-semibold">Method</th>
-                  <th className="px-4 py-3 font-semibold">Date</th>
-                  <th className="px-4 py-3 font-semibold text-right">Amount</th>
-                  <th className="px-4 py-3 font-semibold text-right">Allocated</th>
-                  <th className="px-4 py-3 font-semibold text-right">Advance Balance</th>
-                  <th className="px-4 py-3 font-semibold text-center">Invoices</th>
-                  <th className="px-4 py-3 font-semibold text-center">Receipt</th>
+                  <th className="px-4 py-3.5">Payment #</th>
+                  <th className="px-4 py-3.5">Method</th>
+                  <th className="px-4 py-3.5">Date</th>
+                  <th className="px-4 py-3.5 text-right">Amount</th>
+                  <th className="px-4 py-3.5 text-right">Allocated</th>
+                  <th className="px-4 py-3.5 text-right">Advance Balance</th>
+                  <th className="px-4 py-3.5 text-center">Invoices</th>
+                  <th className="px-4 py-3.5 text-center">Receipt</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-[#E2E7EF]">
                 {payments.map((p) => {
                   const amt = parseFloat(String(p.amount)) || 0;
                   const unalloc = parseFloat(String(p.unallocatedAmount)) || 0;
                   const alloc = amt - unalloc;
 
                   return (
-                    <tr key={p.id} className="hover:bg-slate-800/30 transition-colors">
-                      <td className="px-4 py-3 font-mono font-medium text-white">{p.paymentNumber}</td>
-                      <td className="px-4 py-3">
-                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700">
+                    <tr key={p.id} className="hover:bg-[#F8FAFC] transition-colors">
+                      <td className="px-4 py-3.5 font-mono font-bold text-[#2563EB]">{p.paymentNumber}</td>
+                      <td className="px-4 py-3.5">
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#F1F5F9] text-[#475569] border border-[#E2E7EF]">
                           {p.paymentMethod.replace("_", " ")}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-slate-400">
+                      <td className="px-4 py-3.5 text-[#596579]">
                         {new Date(p.paymentDate).toLocaleDateString()}
                       </td>
-                      <td className="px-4 py-3 text-right font-mono font-bold text-white">
+                      <td className="px-4 py-3.5 text-right font-mono font-bold text-[#172554]">
                         ₹{amt.toFixed(2)}
                       </td>
-                      <td className="px-4 py-3 text-right font-mono font-medium text-emerald-400">
+                      <td className="px-4 py-3.5 text-right font-mono font-bold text-[#15803D]">
                         ₹{alloc.toFixed(2)}
                       </td>
-                      <td className="px-4 py-3 text-right font-mono text-slate-300">
-                        <span className={unalloc > 0 ? "text-amber-400 font-bold" : ""}>
+                      <td className="px-4 py-3.5 text-right font-mono text-[#263247]">
+                        <span className={unalloc > 0 ? "text-[#B45309] font-bold" : "text-[#6B7280]"}>
                           ₹{unalloc.toFixed(2)}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-center text-slate-400">
+                      <td className="px-4 py-3.5 text-center text-[#596579]">
                         {p.allocations?.length || 0} settled
                       </td>
-                      <td className="px-4 py-3 text-center">
+                      <td className="px-4 py-3.5 text-center">
                         <button
                           onClick={() => setSelectedPayment(p)}
-                          className="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[11px] font-medium transition cursor-pointer"
+                          className="px-3 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 text-[#1D4ED8] border border-blue-200 text-xs font-semibold transition cursor-pointer shadow-sm"
                         >
                           View Receipt
                         </button>
@@ -1252,48 +1257,48 @@ const CustomerPaymentsView: React.FC = () => {
 
       {/* Payment Receipt Modal */}
       {selectedPayment && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
-            <div className="p-4 px-6 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-white border border-[#E2E7EF] rounded-2xl max-w-xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
+            <div className="p-4 px-6 border-b border-[#E2E7EF] flex items-center justify-between bg-[#F8FAFC]">
               <div className="flex items-center gap-2">
-                <Receipt className="h-5 w-5 text-emerald-400" />
-                <span className="font-bold text-white text-sm">
+                <Receipt className="h-5 w-5 text-[#2563EB]" />
+                <span className="font-bold text-[#172554] text-base">
                   Payment Receipt {selectedPayment.paymentNumber}
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => window.print()}
-                  className="px-3 py-1.5 rounded-lg border border-slate-700 hover:bg-slate-800 text-xs text-slate-300 font-medium flex items-center gap-1.5 cursor-pointer"
+                  className="px-3 py-1.5 rounded-lg border border-[#E2E7EF] hover:bg-white text-xs text-[#172554] font-semibold flex items-center gap-1.5 cursor-pointer shadow-sm"
                 >
-                  <Printer className="h-3.5 w-3.5" />
+                  <Printer className="h-3.5 w-3.5 text-[#596579]" />
                   Print
                 </button>
                 <button
                   onClick={() => setSelectedPayment(null)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white"
+                  className="p-1.5 rounded-lg text-[#6B7280] hover:text-[#172554] hover:bg-white transition"
                 >
                   <X className="h-4 w-4" />
                 </button>
               </div>
             </div>
 
-            <div className="p-6 overflow-y-auto space-y-6 flex-1 text-xs">
-              <div className="flex justify-between items-start border-b border-slate-800 pb-4">
+            <div className="p-6 overflow-y-auto space-y-6 flex-1 text-xs bg-white">
+              <div className="flex justify-between items-start border-b border-[#E2E7EF] pb-4">
                 <div>
-                  <div className="text-lg font-black tracking-tight text-white">
-                    Bright<span className="text-emerald-400">Loop</span>
+                  <div className="text-xl font-black tracking-tight text-[#172554]">
+                    Bright<span className="text-[#2563EB]">Loop</span>
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">Payment Acknowledgement Voucher</div>
+                  <div className="text-xs text-[#596579] mt-0.5 font-medium">Payment Acknowledgement Voucher</div>
                 </div>
                 <div className="text-right">
-                  <div className="font-mono font-bold text-white text-sm">
+                  <div className="font-mono font-bold text-[#172554] text-sm">
                     {selectedPayment.paymentNumber}
                   </div>
-                  <div className="text-slate-400 mt-1">
+                  <div className="text-[#596579] mt-1 font-medium">
                     Date: {new Date(selectedPayment.paymentDate).toLocaleDateString()}
                   </div>
-                  <div className="text-emerald-400 font-medium mt-0.5">
+                  <div className="text-[#15803D] font-bold mt-0.5">
                     Mode: {selectedPayment.paymentMethod.replace("_", " ")}
                   </div>
                 </div>
@@ -1301,27 +1306,27 @@ const CustomerPaymentsView: React.FC = () => {
 
               {/* Allocation List */}
               <div className="space-y-2">
-                <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                <div className="text-[11px] font-bold text-[#596579] uppercase tracking-wider">
                   Settled Invoice Accounts
                 </div>
                 {selectedPayment.allocations && selectedPayment.allocations.length > 0 ? (
-                  <div className="border border-slate-800 rounded-xl overflow-hidden">
+                  <div className="border border-[#E2E7EF] rounded-xl overflow-hidden shadow-sm">
                     <table className="w-full text-left text-xs">
-                      <thead className="bg-slate-950 text-slate-400 uppercase text-[10px]">
+                      <thead className="bg-[#F8FAFC] text-[#344054] font-bold uppercase text-[10px] border-b border-[#E2E7EF]">
                         <tr>
-                          <th className="px-3 py-2">Invoice #</th>
-                          <th className="px-3 py-2">Allocated Date</th>
-                          <th className="px-3 py-2 text-right">Settled Amount</th>
+                          <th className="px-3.5 py-2.5">Invoice #</th>
+                          <th className="px-3.5 py-2.5">Allocated Date</th>
+                          <th className="px-3.5 py-2.5 text-right">Settled Amount</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-800 text-slate-200">
+                      <tbody className="divide-y divide-[#E2E7EF] text-[#263247]">
                         {selectedPayment.allocations.map((alloc) => (
-                          <tr key={alloc.id}>
-                            <td className="px-3 py-2 font-mono">{alloc.invoice?.invoiceNumber || alloc.invoiceId}</td>
-                            <td className="px-3 py-2 text-slate-400">
+                          <tr key={alloc.id} className="hover:bg-[#F8FAFC]">
+                            <td className="px-3.5 py-2 font-mono font-bold text-[#2563EB]">{alloc.invoice?.invoiceNumber || alloc.invoiceId}</td>
+                            <td className="px-3.5 py-2 text-[#596579]">
                               {new Date(alloc.allocatedAt).toLocaleDateString()}
                             </td>
-                            <td className="px-3 py-2 text-right font-mono font-bold text-emerald-400">
+                            <td className="px-3.5 py-2 text-right font-mono font-bold text-[#15803D]">
                               +₹{parseFloat(String(alloc.amount)).toFixed(2)}
                             </td>
                           </tr>
@@ -1330,7 +1335,7 @@ const CustomerPaymentsView: React.FC = () => {
                     </table>
                   </div>
                 ) : (
-                  <div className="p-4 bg-slate-950 border border-slate-800 rounded-xl text-center text-slate-500">
+                  <div className="p-4 bg-[#F8FAFC] border border-[#E2E7EF] rounded-xl text-center text-[#596579]">
                     Full payment amount maintained as unallocated advance balance.
                   </div>
                 )}
@@ -1338,14 +1343,14 @@ const CustomerPaymentsView: React.FC = () => {
 
               {/* Financial Totals */}
               <div className="flex justify-end">
-                <div className="w-60 space-y-1.5 text-slate-400">
+                <div className="w-64 space-y-2 bg-[#F8FAFC] p-4 rounded-xl border border-[#E2E7EF] text-[#596579]">
                   <div className="flex justify-between">
                     <span>Total Payment Received:</span>
-                    <span className="font-mono text-white font-bold">
+                    <span className="font-mono text-[#172554] font-bold">
                       ₹{parseFloat(String(selectedPayment.amount)).toFixed(2)}
                     </span>
                   </div>
-                  <div className="flex justify-between text-emerald-400">
+                  <div className="flex justify-between text-[#15803D] font-bold">
                     <span>Applied to Invoices:</span>
                     <span className="font-mono">
                       ₹
@@ -1355,7 +1360,7 @@ const CustomerPaymentsView: React.FC = () => {
                       ).toFixed(2)}
                     </span>
                   </div>
-                  <div className="border-t border-slate-800 pt-1.5 flex justify-between font-bold text-amber-400">
+                  <div className="border-t border-[#E2E7EF] pt-2 flex justify-between font-bold text-[#B45309]">
                     <span>Available Advance Balance:</span>
                     <span className="font-mono">
                       ₹{parseFloat(String(selectedPayment.unallocatedAmount)).toFixed(2)}
@@ -1365,10 +1370,10 @@ const CustomerPaymentsView: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-4 px-6 border-t border-slate-800 bg-slate-950/60 flex justify-end">
+            <div className="p-4 px-6 border-t border-[#E2E7EF] bg-[#F8FAFC] flex justify-end">
               <button
                 onClick={() => setSelectedPayment(null)}
-                className="px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-300 text-xs font-medium cursor-pointer"
+                className="px-4 py-2 rounded-lg border border-[#E2E7EF] hover:bg-white text-[#596579] text-xs font-semibold cursor-pointer transition shadow-sm"
               >
                 Close
               </button>
@@ -1379,7 +1384,3 @@ const CustomerPaymentsView: React.FC = () => {
     </div>
   );
 };
-
-
-
-

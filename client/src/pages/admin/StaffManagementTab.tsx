@@ -87,19 +87,19 @@ export const StaffManagementTab: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900/60 p-6 rounded-2xl border border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
-            <Users className="w-6 h-6 text-blue-500" />
+          <h2 className="text-2xl font-bold text-[#172554] tracking-tight flex items-center gap-2.5">
+            <Users className="w-6 h-6 text-[#2563EB]" />
             Staff Member Directory & Roles
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-sm text-[#596579] mt-1">
             Delegate proposal creation, subscription lifecycle operations, and payment allocation authority to internal team members.
           </p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-xl shadow-sm transition-all cursor-pointer"
+          className="inline-flex items-center px-4 py-2.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-medium text-xs rounded-lg shadow-sm hover:shadow transition-all cursor-pointer self-start sm:self-auto"
         >
           <Plus className="w-4 h-4 mr-1.5" />
           Add Staff Member
@@ -108,101 +108,101 @@ export const StaffManagementTab: React.FC = () => {
 
       {feedback && (
         <div
-          className={`p-4 rounded-xl flex items-center justify-between ${
+          className={`p-4 rounded-xl flex items-center justify-between transition-all ${
             feedback.type === "success"
-              ? "bg-emerald-500/10 text-emerald-300 border border-emerald-500/30"
-              : "bg-rose-500/10 text-rose-300 border border-rose-500/30"
+              ? "bg-emerald-50 text-[#15803D] border border-emerald-200"
+              : "bg-rose-50 text-[#B91C1C] border border-rose-200"
           }`}
         >
-          <div className="flex items-center gap-2 text-xs font-medium">
+          <div className="flex items-center gap-2 text-xs font-semibold">
             {feedback.type === "success" ? (
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <CheckCircle2 className="w-4 h-4 text-[#15803D]" />
             ) : (
-              <AlertCircle className="w-4 h-4 text-rose-400" />
+              <AlertCircle className="w-4 h-4 text-[#B91C1C]" />
             )}
             <span>{feedback.text}</span>
           </div>
-          <button onClick={() => setFeedback(null)} className="text-slate-400 hover:text-white">
+          <button onClick={() => setFeedback(null)} className="text-[#6B7280] hover:text-[#172554] p-1 rounded-lg transition">
             <X className="w-4 h-4" />
           </button>
         </div>
       )}
 
       {/* Staff Table */}
-      <div className="rounded-xl border border-slate-800 bg-slate-900/60 overflow-hidden">
+      <div className="rounded-xl border border-[#E2E7EF] bg-white overflow-hidden shadow-sm">
         {loading ? (
-          <div className="p-12 text-center text-slate-400 flex flex-col items-center justify-center">
-            <Loader2 className="w-6 h-6 animate-spin text-blue-500 mb-2" />
+          <div className="p-12 text-center text-[#596579] flex flex-col items-center justify-center">
+            <Loader2 className="w-6 h-6 animate-spin text-[#2563EB] mb-2" />
             <span className="text-xs">Loading staff accounts...</span>
           </div>
         ) : staff.length === 0 ? (
-          <div className="p-12 text-center text-slate-400">
-            <Users className="w-10 h-10 text-slate-600 mx-auto mb-2" />
-            <div className="text-sm font-medium text-slate-300">No Staff Members Added</div>
-            <div className="text-xs text-slate-500 mt-1">
+          <div className="p-12 text-center text-[#596579]">
+            <Users className="w-10 h-10 text-[#687386] mx-auto mb-2" />
+            <div className="text-sm font-semibold text-[#172554]">No Staff Members Added</div>
+            <div className="text-xs text-[#596579] mt-1">
               Add operational staff members above to delegate billing tasks.
             </div>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950/60 text-slate-400 uppercase tracking-wider border-b border-slate-800">
+              <thead className="bg-[#F8FAFC] text-[#344054] font-bold uppercase tracking-wider border-b border-[#E2E7EF]">
                 <tr>
-                  <th className="px-4 py-3 font-semibold">Name</th>
-                  <th className="px-4 py-3 font-semibold">Email</th>
-                  <th className="px-4 py-3 font-semibold">Role</th>
-                  <th className="px-4 py-3 font-semibold">Status</th>
-                  <th className="px-4 py-3 font-semibold">Created Date</th>
-                  <th className="px-4 py-3 font-semibold text-center">Action</th>
+                  <th className="px-4 py-3">Name</th>
+                  <th className="px-4 py-3">Email</th>
+                  <th className="px-4 py-3">Role</th>
+                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3">Created Date</th>
+                  <th className="px-4 py-3 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-[#E2E7EF] text-[#263247]">
                 {staff.map((u) => (
-                  <tr key={u.id} className="hover:bg-slate-800/30 transition-colors">
-                    <td className="px-4 py-3 font-medium text-white flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-full bg-blue-600/20 text-blue-400 border border-blue-500/30 flex items-center justify-center font-bold text-xs">
+                  <tr key={u.id} className="hover:bg-[#F8FAFC] transition-colors">
+                    <td className="px-4 py-3 font-semibold text-[#172554] flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-full bg-blue-50 text-[#1D4ED8] border border-blue-200 flex items-center justify-center font-bold text-xs">
                         {u.name.charAt(0).toUpperCase()}
                       </div>
                       <span>{u.name}</span>
                     </td>
-                    <td className="px-4 py-3 text-slate-300 font-mono">
+                    <td className="px-4 py-3 text-[#263247] font-mono">
                       <div className="flex items-center gap-1.5">
-                        <Mail className="w-3.5 h-3.5 text-slate-500" />
+                        <Mail className="w-3.5 h-3.5 text-[#596579]" />
                         <span>{u.email}</span>
                       </div>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-[#1D4ED8] border border-blue-200">
                         <Shield className="w-3 h-3" />
                         STAFF
                       </span>
                     </td>
                     <td className="px-4 py-3">
                       {u.isActive ? (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-400">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-[#15803D] border border-emerald-200">
                           <CheckCircle2 className="w-3.5 h-3.5" />
                           Active
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-rose-400">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-[#B91C1C] border border-rose-200">
                           <XCircle className="w-3.5 h-3.5" />
                           Deactivated
                         </span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-slate-400">
+                    <td className="px-4 py-3 text-[#596579]">
                       <div className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                        <Calendar className="w-3.5 h-3.5 text-[#596579]" />
                         <span>{new Date(u.createdAt).toLocaleDateString()}</span>
                       </div>
                     </td>
                     <td className="px-4 py-3 text-center">
                       <button
                         onClick={() => handleToggleStatus(u)}
-                        className={`px-2.5 py-1 rounded text-[11px] font-medium transition cursor-pointer ${
+                        className={`px-3 py-1 rounded-lg text-xs font-semibold transition cursor-pointer shadow-sm ${
                           u.isActive
-                            ? "bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30"
-                            : "bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
+                            ? "bg-rose-50 hover:bg-rose-100 text-[#B91C1C] border border-rose-200"
+                            : "bg-emerald-50 hover:bg-emerald-100 text-[#15803D] border border-emerald-200"
                         }`}
                       >
                         {u.isActive ? "Deactivate" : "Activate"}
@@ -218,16 +218,16 @@ export const StaffManagementTab: React.FC = () => {
 
       {/* Add Staff Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full overflow-hidden flex flex-col shadow-2xl">
-            <div className="p-4 px-6 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="bg-white border border-[#E2E7EF] rounded-2xl max-w-md w-full overflow-hidden flex flex-col shadow-2xl">
+            <div className="p-4 px-6 border-b border-[#E2E7EF] flex items-center justify-between bg-[#F8FAFC]">
               <div className="flex items-center gap-2">
-                <Users className="w-5 h-5 text-blue-500" />
-                <h3 className="font-bold text-white text-sm">Add Staff Member</h3>
+                <Users className="w-5 h-5 text-[#2563EB]" />
+                <h3 className="font-bold text-[#172554] text-base">Add Staff Member</h3>
               </div>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="text-slate-400 hover:text-white p-1"
+                className="text-[#6B7280] hover:text-[#172554] p-1.5 rounded-lg hover:bg-white transition"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -235,55 +235,55 @@ export const StaffManagementTab: React.FC = () => {
 
             <form onSubmit={handleCreateStaff} className="p-6 space-y-4 text-xs">
               <div>
-                <label className="block font-medium text-slate-300 mb-1">Full Name *</label>
+                <label className="block font-semibold text-[#344054] mb-1">Full Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Alex Morgan"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 bg-white border border-[#E2E7EF] rounded-lg text-[#202938] text-xs focus:outline-none focus:border-[#2563EB]"
                 />
               </div>
 
               <div>
-                <label className="block font-medium text-slate-300 mb-1">Email Address *</label>
+                <label className="block font-semibold text-[#344054] mb-1">Email Address *</label>
                 <input
                   type="email"
                   required
                   placeholder="alex@brightloop.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 bg-white border border-[#E2E7EF] rounded-lg text-[#202938] text-xs focus:outline-none focus:border-[#2563EB]"
                 />
               </div>
 
               <div>
-                <label className="block font-medium text-slate-300 mb-1">Temporary Password *</label>
+                <label className="block font-semibold text-[#344054] mb-1">Temporary Password *</label>
                 <input
                   type="text"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-white text-xs font-mono focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 bg-white border border-[#E2E7EF] rounded-lg text-[#202938] text-xs font-mono focus:outline-none focus:border-[#2563EB]"
                 />
-                <p className="text-[11px] text-slate-500 mt-1">
+                <p className="text-[11px] text-[#596579] mt-1">
                   Must contain 8+ characters, uppercase, lowercase, number, and special symbol.
                 </p>
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-800">
+              <div className="flex justify-end gap-2.5 pt-4 border-t border-[#E2E7EF]">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-300 font-medium"
+                  className="px-4 py-2 rounded-lg border border-[#E2E7EF] hover:bg-[#F8FAFC] text-[#596579] font-semibold text-xs transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs shadow-sm hover:shadow transition disabled:opacity-50"
                 >
                   {submitting ? "Creating..." : "Create Staff Account"}
                 </button>
