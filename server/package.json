@@ -13,7 +13,8 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
-    "test:auth": "tsx src/tests/testAuth.ts"
+    "test:auth": "tsx src/tests/testAuth.ts",
+    "test:catalog": "tsx src/tests/testCatalog.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
