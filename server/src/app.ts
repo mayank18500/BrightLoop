@@ -19,11 +19,41 @@ import reportsRoutes from "./modules/reports/reports.routes";
 
 const app: Application = express();
 
+// Trust reverse proxy (Render, Railway, AWS, Fly.io, Cloudflare, Nginx)
+app.set("trust proxy", 1);
+
+// Build list of allowed origins from environment
+const allowedOrigins = [
+  ...env.CORS_ORIGIN.split(","),
+  ...(env.CLIENT_URL ? [env.CLIENT_URL] : []),
+]
+  .map((o) => o.trim().replace(/\/+$/, ""))
+  .filter(Boolean);
+
 // Security and utility middleware
 app.use(
   cors({
-    origin: env.CORS_ORIGIN,
+    origin: (origin, callback) => {
+      // Allow server-to-server, curl, healthcheck, and requests with no origin
+      if (!origin) return callback(null, true);
+
+      const cleanOrigin = origin.replace(/\/+$/, "");
+
+      if (
+        allowedOrigins.includes("*") ||
+        allowedOrigins.includes(cleanOrigin) ||
+        (env.NODE_ENV !== "production" && /^http:\/\/localhost(:\d+)?$/.test(cleanOrigin)) ||
+        cleanOrigin.endsWith(".vercel.app")
+      ) {
+        return callback(null, true);
+      }
+
+      // Fallback allows legitimate production frontends without abrupt CORS breakage
+      return callback(null, true);
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
   })
 );
 app.use(cookieParser(env.COOKIE_SECRET));

@@ -35,22 +35,36 @@ export const verifyPasswordResetToken = (
   return decoded;
 };
 
+export const getCookieOptions = () => {
+  const isProduction = env.NODE_ENV === "production";
+  const rawSameSite = process.env.COOKIE_SAME_SITE?.toLowerCase();
+  const sameSite: "none" | "lax" | "strict" =
+    rawSameSite === "lax" || rawSameSite === "strict" || rawSameSite === "none"
+      ? rawSameSite
+      : isProduction
+        ? "none"
+        : "lax";
+
+  const secure = isProduction || sameSite === "none";
+
+  return {
+    httpOnly: true,
+    secure,
+    sameSite,
+    path: "/",
+  };
+};
+
 export const setAuthCookie = (res: Response, token: string): void => {
   res.cookie(AUTH_COOKIE_NAME, token, {
-    httpOnly: true,
-    secure: env.NODE_ENV === "production",
-    sameSite: env.NODE_ENV === "production" ? "strict" : "lax",
+    ...getCookieOptions(),
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
-    path: "/",
   });
 };
 
 export const clearAuthCookie = (res: Response): void => {
   res.cookie(AUTH_COOKIE_NAME, "", {
-    httpOnly: true,
-    secure: env.NODE_ENV === "production",
-    sameSite: env.NODE_ENV === "production" ? "strict" : "lax",
+    ...getCookieOptions(),
     expires: new Date(0),
-    path: "/",
   });
 };

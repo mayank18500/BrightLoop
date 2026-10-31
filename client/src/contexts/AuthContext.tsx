@@ -89,6 +89,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const customEvent = event as CustomEvent<{ reason?: string }>;
       console.warn("🔐 Session terminated by auth:logout event:", customEvent.detail?.reason);
 
+      localStorage.removeItem("brightloop_token");
+      delete api.defaults.headers.common["Authorization"];
+
       if (isMountedRef.current) {
         setUser(null);
         setCustomer(null);
@@ -107,8 +110,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string): Promise<User> => {
     const response = await api.post<{
       success: boolean;
-      data: { user: User; customer?: Customer | null };
+      data: { token?: string; user: User; customer?: Customer | null };
     }>("/auth/login", { email, password });
+
+    if (response.data.data.token) {
+      localStorage.setItem("brightloop_token", response.data.data.token);
+      api.defaults.headers.common["Authorization"] = `Bearer ${response.data.data.token}`;
+    }
 
     const loggedInUser = response.data.data.user;
     if (isMountedRef.current) {
@@ -121,8 +129,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = async (data: RegisterData): Promise<User> => {
     const response = await api.post<{
       success: boolean;
-      data: { user: User; customer?: Customer | null };
+      data: { token?: string; user: User; customer?: Customer | null };
     }>("/auth/register", data);
+
+    if (response.data.data.token) {
+      localStorage.setItem("brightloop_token", response.data.data.token);
+      api.defaults.headers.common["Authorization"] = `Bearer ${response.data.data.token}`;
+    }
 
     const registeredUser = response.data.data.user;
     if (isMountedRef.current) {
@@ -136,6 +149,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       await api.post("/auth/logout");
     } finally {
+      localStorage.removeItem("brightloop_token");
+      delete api.defaults.headers.common["Authorization"];
       if (isMountedRef.current) {
         setUser(null);
         setCustomer(null);

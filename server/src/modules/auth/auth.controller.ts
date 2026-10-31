@@ -12,6 +12,7 @@ export class AuthController {
       res.status(201).json({
         success: true,
         data: {
+          token: result.token,
           user: result.user,
           customer: result.customer,
         },

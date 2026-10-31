@@ -7,11 +7,16 @@ declare module "axios" {
   }
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL.replace(/\/+$/, "")}/api/v1`
+  : "/api/v1";
+
 /**
- * Primary Axios client configured with credentials for HttpOnly cookie authentication.
+ * Primary Axios client configured with credentials for HttpOnly cookie authentication
+ * and optional Bearer token fallback for cross-domain deployments.
  */
 export const api = axios.create({
-  baseURL: "/api/v1",
+  baseURL: API_BASE_URL,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -20,14 +25,23 @@ export const api = axios.create({
 
 /**
  * Isolated Axios instance for refreshing tokens.
- * Crucial: Has NO interceptors attached to guarantee zero possibility of recursive loops.
+ * Crucial: Has NO response interceptors attached to guarantee zero possibility of recursive loops.
  */
 const refreshClient = axios.create({
-  baseURL: "/api/v1",
+  baseURL: API_BASE_URL,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
+});
+
+// Attach stored token from localStorage if present
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("brightloop_token");
+  if (token && !config.headers.get("Authorization")) {
+    config.headers.set("Authorization", `Bearer ${token}`);
+  }
+  return config;
 });
 
 // Refresh queue management state
@@ -39,6 +53,8 @@ let failedQueue: Array<{
 
 let lastLogoutDispatch = 0;
 const dispatchLogout = (reason = "session_expired") => {
+  localStorage.removeItem("brightloop_token");
+  delete api.defaults.headers.common["Authorization"];
   const now = Date.now();
   if (now - lastLogoutDispatch > 2000) {
     lastLogoutDispatch = now;
@@ -112,6 +128,7 @@ api.interceptors.response.use(
         // If backend returned a bearer token, update Authorization header default
         const newToken = refreshResponse.data?.data?.token;
         if (newToken) {
+          localStorage.setItem("brightloop_token", newToken);
           api.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
           originalRequest.headers.set("Authorization", `Bearer ${newToken}`);
         }
