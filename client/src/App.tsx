@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { BarChart3, Settings } from "lucide-react";
 import { AuthProvider } from "./contexts/AuthContext";
 import { useAuth } from "./hooks/useAuth";
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -25,7 +24,8 @@ import { SubscriptionsTab } from "./pages/staff/SubscriptionsTab";
 import { InvoicesTab } from "./pages/staff/InvoicesTab";
 import { PaymentsTab } from "./pages/staff/PaymentsTab";
 import { CustomerPortal } from "./pages/customer/CustomerPortal";
-import { PlaceholderPage } from "./pages/common/PlaceholderPage";
+import { ReportsTab } from "./pages/admin/ReportsTab";
+import { SettingsTab } from "./pages/admin/SettingsTab";
 
 const RootNavigator: React.FC = () => {
   const { user, loading } = useAuth();
@@ -86,29 +86,9 @@ export const App: React.FC = () => {
             <Route path="payments" element={<PaymentsTab />} />
             <Route path="discounts" element={<DiscountsTab />} />
             <Route path="taxes" element={<TaxesTab />} />
-            <Route
-              path="reports"
-              element={
-                <PlaceholderPage
-                  title="Financial Reports & Analytics"
-                  subtitle="Track real-time recurring revenue (MRR/ARR), churn rates, and aged overdue receivables."
-                  module="Financial Reports"
-                  icon={BarChart3}
-                />
-              }
-            />
+            <Route path="reports" element={<ReportsTab />} />
             <Route path="staff" element={<StaffManagementTab />} />
-            <Route
-              path="settings"
-              element={
-                <PlaceholderPage
-                  title="System Settings"
-                  subtitle="Configure enterprise workspace defaults, tax rules, and system credentials."
-                  module="Settings"
-                  icon={Settings}
-                />
-              }
-            />
+            <Route path="settings" element={<SettingsTab />} />
           </Route>
 
           {/* ========================================================= */}
