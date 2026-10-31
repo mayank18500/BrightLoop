@@ -1,44 +1,132 @@
 @import "tailwindcss";
 
-:root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --card-foreground: #0f172a;
-  --popover: #ffffff;
-  --popover-foreground: #0f172a;
-  --primary: #2563eb;
-  --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #1e293b;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #f1f5f9;
-  --accent-foreground: #0f172a;
-  --destructive: #ef4444;
-  --destructive-foreground: #f8fafc;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #2563eb;
-  --radius: 0.5rem;
+@layer base {
+  :root {
+    /* Primary Typography Colors - High Contrast */
+    --color-primary-heading: #172554;
+    --color-main-text: #263247;
+    --color-secondary-text: #596579;
+    --color-muted-text: #6B7280;
+    --color-input-text: #202938;
+    --color-placeholder: #687386;
+    --color-table-heading: #344054;
+    --color-table-content: #263247;
+
+    /* Backgrounds & Surfaces */
+    --color-main-bg: #FCFCFA;
+    --color-card-bg: #FFFFFF;
+    --color-border: #E2E7EF;
+
+    /* Brand & Accent */
+    --color-royal-blue: #4169E1;
+    --color-soft-blue: #EEF4FF;
+
+    /* Semantic Status Colors */
+    --color-success: #15803D;
+    --color-warning: #B45309;
+    --color-error: #B91C1C;
+    --color-info: #1D4ED8;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--color-main-bg);
+    color: var(--color-main-text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    line-height: 1.5;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+  }
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    "Open Sans",
-    "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
+/* Card & Surface Utilities */
+.card-surface {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E7EF;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(16, 24, 40, 0.05);
+}
+
+.card-surface-interactive {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E7EF;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(16, 24, 40, 0.05);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-surface-interactive:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 12px 0 rgba(16, 24, 40, 0.08);
+}
+
+/* Modal Surface */
+.modal-surface {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E7EF;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+/* Input Surface */
+.input-surface {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E7EF;
+  border-radius: 10px;
+  color: #202938;
+  font-size: 0.875rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.input-surface::placeholder {
+  color: #687386;
+}
+
+.input-surface:focus {
+  outline: none;
+  border-color: #4169E1;
+  box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.12);
+}
+
+/* Shimmer animation for loading skeletons */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(226, 231, 239, 0.6) 0%,
+    rgba(241, 245, 249, 0.9) 50%,
+    rgba(226, 231, 239, 0.6) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite;
 }

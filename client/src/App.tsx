@@ -1,22 +1,40 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BarChart3, Settings } from "lucide-react";
 import { AuthProvider } from "./contexts/AuthContext";
 import { useAuth } from "./hooks/useAuth";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { LoginPage } from "./pages/auth/LoginPage";
 import { RegisterPage } from "./pages/auth/RegisterPage";
-import { AdminDashboard } from "./pages/admin/AdminDashboard";
-import { StaffDashboard } from "./pages/staff/StaffDashboard";
+
+// Layout Shells
+import { AdminLayout } from "./layouts/AdminLayout";
+import { StaffLayout } from "./layouts/StaffLayout";
+import { CustomerLayout } from "./layouts/CustomerLayout";
+
+// Module Views
+import { OverviewTab } from "./pages/admin/OverviewTab";
+import { ProductsTab } from "./pages/admin/ProductsTab";
+import { PlansTab } from "./pages/admin/PlansTab";
+import { TaxesTab } from "./pages/admin/TaxesTab";
+import { DiscountsTab } from "./pages/admin/DiscountsTab";
+import { StaffManagementTab } from "./pages/admin/StaffManagementTab";
+import { CustomersTab } from "./pages/staff/CustomersTab";
+import { QuotationsTab } from "./pages/staff/QuotationsTab";
+import { SubscriptionsTab } from "./pages/staff/SubscriptionsTab";
+import { InvoicesTab } from "./pages/staff/InvoicesTab";
+import { PaymentsTab } from "./pages/staff/PaymentsTab";
 import { CustomerPortal } from "./pages/customer/CustomerPortal";
+import { PlaceholderPage } from "./pages/common/PlaceholderPage";
 
 const RootNavigator: React.FC = () => {
   const { user, loading } = useAuth();
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">
-        <div className="h-6 w-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mr-3" />
-        Loading BrightLoop...
+      <div className="min-h-screen bg-[#FCFCFA] flex items-center justify-center text-[#758096]">
+        <div className="h-6 w-6 border-2 border-[#4169E1] border-t-transparent rounded-full animate-spin mr-3" />
+        <span className="text-sm font-medium">Loading BrightLoop...</span>
       </div>
     );
   }
@@ -26,14 +44,14 @@ const RootNavigator: React.FC = () => {
   }
 
   if (user.role === "ADMIN") {
-    return <Navigate to="/admin" replace />;
+    return <Navigate to="/admin/dashboard" replace />;
   }
 
   if (user.role === "STAFF") {
-    return <Navigate to="/staff" replace />;
+    return <Navigate to="/staff/dashboard" replace />;
   }
 
-  return <Navigate to="/portal" replace />;
+  return <Navigate to="/portal/overview" replace />;
 };
 
 export const App: React.FC = () => {
@@ -41,41 +59,99 @@ export const App: React.FC = () => {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
+          {/* Public Authentication */}
           <Route path="/" element={<RootNavigator />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
 
-          {/* Admin Protected Routes */}
+          {/* ========================================================= */}
+          {/* 1. ADMIN DASHBOARD & WORKSPACE                            */}
+          {/* ========================================================= */}
           <Route
-            path="/admin/*"
+            path="/admin"
             element={
               <ProtectedRoute allowedRoles={["ADMIN"]}>
-                <AdminDashboard />
+                <AdminLayout />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<OverviewTab />} />
+            <Route path="customers" element={<CustomersTab />} />
+            <Route path="products" element={<ProductsTab />} />
+            <Route path="plans" element={<PlansTab />} />
+            <Route path="quotations" element={<QuotationsTab />} />
+            <Route path="subscriptions" element={<SubscriptionsTab />} />
+            <Route path="invoices" element={<InvoicesTab />} />
+            <Route path="payments" element={<PaymentsTab />} />
+            <Route path="discounts" element={<DiscountsTab />} />
+            <Route path="taxes" element={<TaxesTab />} />
+            <Route
+              path="reports"
+              element={
+                <PlaceholderPage
+                  title="Financial Reports & Analytics"
+                  subtitle="Track real-time recurring revenue (MRR/ARR), churn rates, and aged overdue receivables."
+                  module="Financial Reports"
+                  icon={BarChart3}
+                />
+              }
+            />
+            <Route path="staff" element={<StaffManagementTab />} />
+            <Route
+              path="settings"
+              element={
+                <PlaceholderPage
+                  title="System Settings"
+                  subtitle="Configure enterprise workspace defaults, tax rules, and system credentials."
+                  module="Settings"
+                  icon={Settings}
+                />
+              }
+            />
+          </Route>
 
-          {/* Staff Protected Routes */}
+          {/* ========================================================= */}
+          {/* 2. STAFF OPERATIONS WORKSPACE                              */}
+          {/* ========================================================= */}
           <Route
-            path="/staff/*"
+            path="/staff"
             element={
               <ProtectedRoute allowedRoles={["STAFF", "ADMIN"]}>
-                <StaffDashboard />
+                <StaffLayout />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<OverviewTab />} />
+            <Route path="customers" element={<CustomersTab />} />
+            <Route path="quotations" element={<QuotationsTab />} />
+            <Route path="subscriptions" element={<SubscriptionsTab />} />
+            <Route path="invoices" element={<InvoicesTab />} />
+            <Route path="payments" element={<PaymentsTab />} />
+          </Route>
 
-          {/* Customer Portal Protected Routes */}
+          {/* ========================================================= */}
+          {/* 3. CUSTOMER SELF-SERVICE PORTAL                           */}
+          {/* ========================================================= */}
           <Route
-            path="/portal/*"
+            path="/portal"
             element={
               <ProtectedRoute allowedRoles={["CUSTOMER"]}>
-                <CustomerPortal />
+                <CustomerLayout />
               </ProtectedRoute>
             }
-          />
+          >
+            <Route index element={<Navigate to="overview" replace />} />
+            <Route path="overview" element={<CustomerPortal embedded tab="overview" />} />
+            <Route path="quotations" element={<CustomerPortal embedded tab="proposals" />} />
+            <Route path="subscriptions" element={<CustomerPortal embedded tab="subscriptions" />} />
+            <Route path="invoices" element={<CustomerPortal embedded tab="invoices" />} />
+            <Route path="payments" element={<CustomerPortal embedded tab="payments" />} />
+            <Route path="profile" element={<CustomerPortal embedded tab="overview" />} />
+          </Route>
 
-          {/* Catch-all */}
+          {/* Fallback Catch-All */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AuthProvider>
