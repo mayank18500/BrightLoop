@@ -275,6 +275,15 @@ export class QuotationsService {
         include: {
           customer: { select: { id: true, companyName: true, contactName: true, email: true } },
           plan: { select: { id: true, name: true, billingFrequency: true, billingInterval: true } },
+          items: {
+            include: {
+              product: { select: { id: true, name: true } },
+              variant: { select: { id: true, name: true } },
+            },
+          },
+          subscription: {
+            select: { id: true, subscriptionNumber: true, status: true },
+          },
           _count: { select: { items: true } },
         },
         orderBy: { createdAt: "desc" },

@@ -442,8 +442,10 @@ export const QuotationsTab: React.FC = () => {
                 </tr>
               ) : (
                 filteredQuotations.map((q) => {
-                  const hasSub = !!(q.subscriptions && q.subscriptions.length > 0);
+                  const hasSub = !!q.subscription || !!(q.subscriptions && q.subscriptions.length > 0);
                   const isExpired = new Date() > new Date(q.expiresAt) && q.status !== "CONFIRMED";
+                  const itemsCount = q.items?.length ?? (q as any)._count?.items ?? 0;
+                  const firstItemName = q.items?.[0]?.product?.name || "Product";
 
                   return (
                     <tr
@@ -475,11 +477,11 @@ export const QuotationsTab: React.FC = () => {
                       </td>
                       <td className="px-4 py-3.5">
                         <span className="text-slate-300">
-                          {q.items.length} {q.items.length === 1 ? "line item" : "line items"}
+                          {itemsCount} {itemsCount === 1 ? "line item" : "line items"}
                         </span>
                         <div className="text-[11px] text-slate-400">
-                          {q.items[0]?.product?.name || "Product"}
-                          {q.items.length > 1 ? ` +${q.items.length - 1} more` : ""}
+                          {firstItemName}
+                          {itemsCount > 1 ? ` +${itemsCount - 1} more` : ""}
                         </div>
                       </td>
                       <td className="px-4 py-3.5">
@@ -963,7 +965,7 @@ export const QuotationsTab: React.FC = () => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-800/60 text-slate-200">
-                      {selectedQuotation.items.map((it) => (
+                      {(selectedQuotation.items || []).map((it) => (
                         <tr key={it.id}>
                           <td className="px-3.5 py-2.5">
                             <div className="font-medium text-white">{it.product?.name || "Product"}</div>

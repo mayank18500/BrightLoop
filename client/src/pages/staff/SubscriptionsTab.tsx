@@ -225,7 +225,7 @@ export const SubscriptionsTab: React.FC = () => {
   const totalMonthlyValue = subscriptions
     .filter((s) => s.status === "ACTIVE")
     .reduce((sum, s) => {
-      const itemsSum = s.items.reduce((acc, it) => acc + Number(it.unitPrice) * it.quantity, 0);
+      const itemsSum = (s.items || []).reduce((acc, it) => acc + Number(it.unitPrice) * it.quantity, 0);
       return sum + itemsSum;
     }, 0);
 
@@ -416,7 +416,8 @@ export const SubscriptionsTab: React.FC = () => {
                 </tr>
               ) : (
                 filteredSubs.map((sub) => {
-                  const contractValue = sub.items.reduce(
+                  const itemsCount = sub.items?.length ?? 0;
+                  const contractValue = (sub.items || []).reduce(
                     (acc, it) => acc + Number(it.unitPrice) * it.quantity,
                     0
                   );
@@ -453,7 +454,7 @@ export const SubscriptionsTab: React.FC = () => {
                           ₹{contractValue.toLocaleString("en-IN", { minimumFractionDigits: 2 })}
                         </div>
                         <div className="text-[11px] text-slate-400">
-                          {sub.items.length} {sub.items.length === 1 ? "product" : "products"}
+                          {itemsCount} {itemsCount === 1 ? "product" : "products"}
                         </div>
                       </td>
                       <td className="px-4 py-3.5">
@@ -797,7 +798,7 @@ export const SubscriptionsTab: React.FC = () => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-800/60 text-slate-200">
-                      {selectedSub.items.map((it) => (
+                      {(selectedSub.items || []).map((it) => (
                         <tr key={it.id}>
                           <td className="px-3.5 py-2.5">
                             <div className="font-medium text-white">{it.product?.name || "Product"}</div>

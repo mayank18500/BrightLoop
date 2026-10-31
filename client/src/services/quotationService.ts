@@ -47,8 +47,9 @@ export interface Quotation {
   updatedAt: string;
   customer?: CustomerInfo;
   plan?: Plan | null;
-  items: QuotationItem[];
+  items?: QuotationItem[];
   createdBy?: { id: string; name: string; email: string } | null;
+  subscription?: { id: string; subscriptionNumber: string; status: string } | null;
   subscriptions?: { id: string; subscriptionNumber: string; status: string }[];
 }
 

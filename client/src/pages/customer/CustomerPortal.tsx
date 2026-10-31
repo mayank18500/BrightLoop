@@ -385,7 +385,7 @@ const CustomerProposalsView: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-800/60 text-slate-200">
-                    {selectedQuotation.items.map((it) => (
+                    {(selectedQuotation.items || []).map((it) => (
                       <tr key={it.id}>
                         <td className="px-3 py-2.5">
                           <div className="font-semibold text-white">{it.product?.name || "Product"}</div>
@@ -565,7 +565,7 @@ const CustomerSubscriptionsView: React.FC = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {subscriptions.map((sub) => {
-            const contractTotal = sub.items.reduce(
+            const contractTotal = (sub.items || []).reduce(
               (acc, it) => acc + Number(it.unitPrice) * it.quantity,
               0
             );
@@ -685,7 +685,7 @@ const CustomerSubscriptionsView: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-800/60 text-slate-200">
-                    {selectedSub.items.map((it) => (
+                    {(selectedSub.items || []).map((it) => (
                       <tr key={it.id}>
                         <td className="px-3 py-2.5">
                           <div className="font-semibold text-white">{it.product?.name || "Product"}</div>
